@@ -1,8 +1,8 @@
 name: LinkPeek
 description: >-
-  A developer utility REST API bundling ~92 JSON endpoints for URL intelligence (link preview, metadata, OpenGraph), QR
-  generation, DNS/WHOIS/SSL security checks, and data-conversion dev tools. Includes an OpenAI-compatible
-  chat/completions surface. Hobby-grade service hosted on Oracle Cloud Free Tier via a raw-IP sslip.io hostname.
+  Self-hosted, open-source traffic-debugging toolkit (Go) with a web UI for inspecting inbound traffic, testing payload
+  variants, and exercising retry scenarios. Organized into capture, payload, retry, scanner, tunnel, and realtime labs.
+  Backend exposes authenticated HTTP APIs plus a WebSocket realtime hub.
 url: https://linkpeek.apievangelist.com/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
@@ -38,6 +38,14 @@ tags:
   - web-security-scanning
   - data-conversion
   - openai-compatible-llm
+  - API Testing & Debugging
+  - Webhook/Traffic Inspection
+  - Observability & Incident Response
+  - Realtime/WebSocket
+  - Self-Hosted
+  - Open Source
+  - Go
+  - Docker
 apis:
   - name: LinkPeek Screenshot API
     description: >-
@@ -98,13 +106,34 @@ apis:
         url: https://147.15.103.217.sslip.io
       - type: Documentation
         url: https://147.15.103.217.sslip.io/api/status
+  - name: LinkPeek HTTP & Realtime API
+    description: >-
+      Authenticated HTTP APIs and WebSocket realtime topics for traffic capture, payload testing, retries, scanning,
+      tunnels, and analytics. Self-hosted; no machine-readable contract published.
+    humanURL: https://linkpreview.tech/
+    baseURL: https://147.15.103.217.sslip.io:5000
+    tags:
+      - Developer Tools
+      - API Testing & Debugging
+      - Webhook/Traffic Inspection
+      - Observability & Incident Response
+      - Realtime/WebSocket
+      - Self-Hosted
+      - Open Source
+      - Go
+      - Docker
+    properties:
+      - type: Documentation
+        url: https://linkpreview.tech/
 maintainers:
   - FN: Russell Ballestrini
     url: https://linkpeek.com
   - FN: dcn13l
     url: https://github.com/dcn13l/hermes-autonomia
+  - FN: Abbas-Hoseiny
+    url: https://github.com/Abbas-Hoseiny/linkpeek
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 88
-  at: '2026-08-09T13:22:35.908Z'
+  confidence: 70
+  at: '2026-08-09T19:17:46.391Z'
