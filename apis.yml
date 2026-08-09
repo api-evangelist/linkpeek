@@ -1,9 +1,8 @@
 name: LinkPeek
 description: >-
-  A developer utility REST API offering ~69-80+ GET endpoints for URL intelligence (link preview, metadata, OpenGraph,
-  oEmbed), QR code generation, network/security tooling (DNS, WHOIS, SSL, IP info), and data/format conversion. Also
-  exposes an OpenAI-compatible Chat Completions API. Free tier requires no auth (100 req/day); optional API key for
-  higher quota.
+  A developer utility REST API bundling ~92 JSON endpoints for URL intelligence (link preview, metadata, OpenGraph), QR
+  generation, DNS/WHOIS/SSL security checks, and data-conversion dev tools. Includes an OpenAI-compatible
+  chat/completions surface. Hobby-grade service hosted on Oracle Cloud Free Tier via a raw-IP sslip.io hostname.
 url: https://linkpeek.apievangelist.com/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
@@ -31,6 +30,14 @@ tags:
   - IP Geolocation
   - Data Conversion
   - LLM-Compatible API
+  - api-utilities
+  - url-metadata
+  - link-preview
+  - qr-code-generation
+  - dns-whois
+  - web-security-scanning
+  - data-conversion
+  - openai-compatible-llm
 apis:
   - name: LinkPeek Screenshot API
     description: >-
@@ -53,9 +60,8 @@ apis:
         url: https://linkpeek.com/docs
   - name: LinkPeek API
     description: >-
-      REST/JSON HTTP API with ~69-80+ GET endpoints for URL intelligence, QR/images, network/security, and dev tools,
-      plus OpenAI-compatible chat completion endpoints. Free tier usable with no auth; optional apiKey query param for
-      higher quota.
+      REST API with ~92 endpoints for URL intelligence, QR codes, DNS/WHOIS/SSL, and developer utilities. Optional API
+      key via query parameter; free tier metered per IP. Also exposes an OpenAI-compatible chat/completions surface.
     humanURL: https://147.15.103.217.sslip.io
     baseURL: https://147.15.103.217.sslip.io
     tags:
@@ -72,6 +78,15 @@ apis:
       - IP Geolocation
       - Data Conversion
       - LLM-Compatible API
+      - developer-tools
+      - api-utilities
+      - url-metadata
+      - link-preview
+      - qr-code-generation
+      - dns-whois
+      - web-security-scanning
+      - data-conversion
+      - openai-compatible-llm
     properties:
       - type: OpenAPI
         url: https://147.15.103.217.sslip.io/openapi.yaml
@@ -91,5 +106,5 @@ maintainers:
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 90
-  at: '2026-08-09T12:07:23.827Z'
+  confidence: 88
+  at: '2026-08-09T13:22:35.908Z'
