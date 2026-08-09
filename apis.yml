@@ -1,8 +1,9 @@
 name: LinkPeek
 description: >-
-  Real-time webpage screenshot and website-snapshot service. Capture full-size or full-height screenshots via a simple
-  API, with device viewport mocking, cropping/aspect-ratio control, caching, and high throughput (100+
-  screenshots/minute).
+  A developer utility REST API offering ~69-80+ GET endpoints for URL intelligence (link preview, metadata, OpenGraph,
+  oEmbed), QR code generation, network/security tooling (DNS, WHOIS, SSL, IP info), and data/format conversion. Also
+  exposes an OpenAI-compatible Chat Completions API. Free tier requires no auth (100 req/day); optional API key for
+  higher quota.
 url: https://linkpeek.apievangelist.com/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
@@ -17,6 +18,19 @@ tags:
   - developer-tools
   - saas
   - rest-image-api
+  - Developer Tools
+  - Utility API
+  - URL Metadata
+  - Link Preview
+  - OpenGraph
+  - QR Code Generation
+  - DNS
+  - WHOIS
+  - SSL
+  - Web Security Scanning
+  - IP Geolocation
+  - Data Conversion
+  - LLM-Compatible API
 apis:
   - name: LinkPeek Screenshot API
     description: >-
@@ -37,11 +51,45 @@ apis:
     properties:
       - type: Documentation
         url: https://linkpeek.com/docs
+  - name: LinkPeek API
+    description: >-
+      REST/JSON HTTP API with ~69-80+ GET endpoints for URL intelligence, QR/images, network/security, and dev tools,
+      plus OpenAI-compatible chat completion endpoints. Free tier usable with no auth; optional apiKey query param for
+      higher quota.
+    humanURL: https://147.15.103.217.sslip.io
+    baseURL: https://147.15.103.217.sslip.io
+    tags:
+      - Developer Tools
+      - Utility API
+      - URL Metadata
+      - Link Preview
+      - OpenGraph
+      - QR Code Generation
+      - DNS
+      - WHOIS
+      - SSL
+      - Web Security Scanning
+      - IP Geolocation
+      - Data Conversion
+      - LLM-Compatible API
+    properties:
+      - type: OpenAPI
+        url: https://147.15.103.217.sslip.io/openapi.yaml
+      - type: OpenAPI
+        url: https://github.com/dcn13l/hermes-autonomia/blob/main/openapi.yaml
+      - type: PostmanCollection
+        url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+      - type: Documentation
+        url: https://147.15.103.217.sslip.io
+      - type: Documentation
+        url: https://147.15.103.217.sslip.io/api/status
 maintainers:
   - FN: Russell Ballestrini
     url: https://linkpeek.com
+  - FN: dcn13l
+    url: https://github.com/dcn13l/hermes-autonomia
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 70
-  at: '2026-08-09T08:12:47.490Z'
+  confidence: 90
+  at: '2026-08-09T12:07:23.827Z'
