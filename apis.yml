@@ -1,0 +1,47 @@
+name: LinkPeek
+description: >-
+  Real-time webpage screenshot and website-snapshot service. Capture full-size or full-height screenshots via a simple
+  API, with device viewport mocking, cropping/aspect-ratio control, caching, and high throughput (100+
+  screenshots/minute).
+url: https://linkpeek.apievangelist.com/apis.yml
+created: '2026-08-09'
+modified: '2026-08-09'
+specificationVersion: '0.21'
+tags:
+  - screenshots
+  - webpage-capture
+  - website-thumbnails
+  - image-generation
+  - rendering
+  - web-scraping-adjacent
+  - developer-tools
+  - saas
+  - rest-image-api
+apis:
+  - name: LinkPeek Screenshot API
+    description: >-
+      HTTP/REST-style image API: request a target URL with parameters (e.g. size=original, viewport flags) and receive a
+      webpage screenshot image. API-key authenticated; paid plans from $20/month.
+    humanURL: https://linkpeek.com/docs
+    baseURL: ''
+    tags:
+      - screenshots
+      - webpage-capture
+      - website-thumbnails
+      - image-generation
+      - rendering
+      - web-scraping-adjacent
+      - developer-tools
+      - saas
+      - rest-image-api
+    properties:
+      - type: Documentation
+        url: https://linkpeek.com/docs
+maintainers:
+  - FN: Russell Ballestrini
+    url: https://linkpeek.com
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 70
+  at: '2026-08-09T08:12:47.490Z'
