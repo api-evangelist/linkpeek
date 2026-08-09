@@ -1,8 +1,8 @@
 name: LinkPeek
 description: >-
-  Self-hosted, open-source traffic-debugging toolkit (Go) with a web UI for inspecting inbound traffic, testing payload
-  variants, and exercising retry scenarios. Organized into capture, payload, retry, scanner, tunnel, and realtime labs.
-  Backend exposes authenticated HTTP APIs plus a WebSocket realtime hub.
+  Free developer utility API with ~80 endpoints — link previews, QR codes, headers, DNS, WHOIS, SSL/security scans, cron
+  parsing, encoding utilities, and more — in one JSON call, no signup required. Also exposes an OpenAI-compatible
+  chat/completions endpoint. Solo/hobbyist project served from an IP-only sslip.io host on Oracle Cloud Free Tier.
 url: https://linkpeek.apievangelist.com/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
@@ -46,6 +46,14 @@ tags:
   - Open Source
   - Go
   - Docker
+  - API Utilities
+  - URL/Link Preview
+  - Metadata & OpenGraph
+  - DNS/WHOIS
+  - SSL/Security Scanning
+  - Web Scraping/Extraction
+  - Dev Encoding Utilities
+  - OpenAI-compatible LLM endpoint
 apis:
   - name: LinkPeek Screenshot API
     description: >-
@@ -68,8 +76,10 @@ apis:
         url: https://linkpeek.com/docs
   - name: LinkPeek API
     description: >-
-      REST API with ~92 endpoints for URL intelligence, QR codes, DNS/WHOIS/SSL, and developer utilities. Optional API
-      key via query parameter; free tier metered per IP. Also exposes an OpenAI-compatible chat/completions surface.
+      REST utility API with ~80 GET endpoints under /api/* covering URL intelligence, QR/image generation, security/DNS,
+      and developer encoding tools. Anonymous free tier (100 req/day per IP) plus optional API key passed as the 'key'
+      query parameter for Trial/Pro tiers. Documented by a public OpenAPI 3.0.3 contract. Also exposes an
+      OpenAI-compatible /v1/chat/completions endpoint.
     humanURL: https://147.15.103.217.sslip.io
     baseURL: https://147.15.103.217.sslip.io
     tags:
@@ -95,6 +105,14 @@ apis:
       - web-security-scanning
       - data-conversion
       - openai-compatible-llm
+      - API Utilities
+      - URL/Link Preview
+      - Metadata & OpenGraph
+      - DNS/WHOIS
+      - SSL/Security Scanning
+      - Web Scraping/Extraction
+      - Dev Encoding Utilities
+      - OpenAI-compatible LLM endpoint
     properties:
       - type: OpenAPI
         url: https://147.15.103.217.sslip.io/openapi.yaml
@@ -135,5 +153,5 @@ maintainers:
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 70
-  at: '2026-08-09T19:17:46.391Z'
+  confidence: 78
+  at: '2026-08-09T20:45:02.935Z'
