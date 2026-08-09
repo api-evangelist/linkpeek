@@ -1,8 +1,8 @@
 name: LinkPeek
 description: >-
-  An indie developer utility REST API bundling ~90 endpoints for URL/link intelligence, QR code and image generation,
-  security/network scanning (SSL, DNS, WHOIS), and dev tools (encoding, hashing, JWT decode). Also exposes an
-  OpenAI-compatible chat/completions endpoint. Backed by a published OpenAPI 3.0.3 contract.
+  A developer utility REST API bundling ~92 JSON endpoints for URL intelligence (link preview, metadata, OpenGraph), QR
+  generation, DNS/WHOIS/SSL security checks, and data-conversion dev tools. Includes an OpenAI-compatible
+  chat/completions surface. Hobby-grade service hosted on Oracle Cloud Free Tier via a raw-IP sslip.io hostname.
 url: https://linkpeek.apievangelist.com/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
@@ -38,38 +38,13 @@ tags:
   - web-security-scanning
   - data-conversion
   - openai-compatible-llm
-  - API Testing & Debugging
-  - Webhook/Traffic Inspection
-  - Observability & Incident Response
-  - Realtime/WebSocket
-  - Self-Hosted
-  - Open Source
-  - Go
-  - Docker
-  - API Utilities
-  - URL/Link Preview
-  - Metadata & OpenGraph
-  - DNS/WHOIS
-  - SSL/Security Scanning
-  - Web Scraping/Extraction
-  - Dev Encoding Utilities
-  - OpenAI-compatible LLM endpoint
-  - Developer tools
-  - API utilities
-  - Link preview
-  - OpenGraph metadata
-  - QR code generation
-  - Web security scanning
-  - IP geolocation
-  - Data encoding
-  - LLM-compatible
 apis:
   - name: LinkPeek Screenshot API
     description: >-
       HTTP/REST-style image API: request a target URL with parameters (e.g. size=original, viewport flags) and receive a
       webpage screenshot image. API-key authenticated; paid plans from $20/month.
     humanURL: https://linkpeek.com/docs
-    baseURL: ''
+    baseURL: https://linkpeek.com/api/v1
     tags:
       - screenshots
       - webpage-capture
@@ -83,11 +58,22 @@ apis:
     properties:
       - type: Documentation
         url: https://linkpeek.com/docs
+      - type: APIReference
+        url: https://linkpeek.com/docs/request-options
+      - type: DeveloperPortal
+        url: https://linkpeek.com/
+      - type: Pricing
+        url: https://linkpeek.com/how-much-does-linkpeek-cost
+      - type: Login
+        url: https://linkpeek.com/login
+      - type: Support
+        url: https://linkpeek.com/contact
+      - type: Blog
+        url: https://linkpeek.com/blog
   - name: LinkPeek API
     description: >-
-      Public REST API with ~90 endpoints for URL intelligence, QR/images, security/network lookups, and dev tools, plus
-      an OpenAI-compatible chat/completions interface. Free anonymous tier metered by IP; optional API key via query
-      parameter.
+      REST API with ~92 endpoints for URL intelligence, QR codes, DNS/WHOIS/SSL, and developer utilities. Optional API
+      key via query parameter; free tier metered per IP. Also exposes an OpenAI-compatible chat/completions surface.
     humanURL: https://147.15.103.217.sslip.io
     baseURL: https://147.15.103.217.sslip.io
     tags:
@@ -113,62 +99,99 @@ apis:
       - web-security-scanning
       - data-conversion
       - openai-compatible-llm
-      - API Utilities
-      - URL/Link Preview
-      - Metadata & OpenGraph
-      - DNS/WHOIS
-      - SSL/Security Scanning
-      - Web Scraping/Extraction
-      - Dev Encoding Utilities
-      - OpenAI-compatible LLM endpoint
-      - Developer tools
-      - API utilities
-      - Link preview
-      - OpenGraph metadata
-      - QR code generation
-      - Web security scanning
-      - IP geolocation
-      - Data encoding
-      - LLM-compatible
     properties:
+      - type: OpenAPI
+        url: openapi/linkpeek-openapi-original.yml
       - type: OpenAPI
         url: https://147.15.103.217.sslip.io/openapi.yaml
       - type: OpenAPI
         url: https://github.com/dcn13l/hermes-autonomia/blob/main/openapi.yaml
+      - type: Overlay
+        url: overlays/linkpeek-openapi-overlay.yaml
       - type: PostmanCollection
         url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
       - type: Documentation
         url: https://147.15.103.217.sslip.io
       - type: Documentation
         url: https://147.15.103.217.sslip.io/api/status
-  - name: LinkPeek HTTP & Realtime API
-    description: >-
-      Authenticated HTTP APIs and WebSocket realtime topics for traffic capture, payload testing, retries, scanning,
-      tunnels, and analytics. Self-hosted; no machine-readable contract published.
-    humanURL: https://linkpreview.tech/
-    baseURL: https://147.15.103.217.sslip.io:5000
-    tags:
-      - Developer Tools
-      - API Testing & Debugging
-      - Webhook/Traffic Inspection
-      - Observability & Incident Response
-      - Realtime/WebSocket
-      - Self-Hosted
-      - Open Source
-      - Go
-      - Docker
-    properties:
-      - type: Documentation
-        url: https://linkpreview.tech/
+      - type: APIReference
+        url: https://147.15.103.217.sslip.io/api/status
+      - type: DeveloperPortal
+        url: https://147.15.103.217.sslip.io
+      - type: GettingStarted
+        url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+      - type: SourceCode
+        url: https://github.com/dcn13l/hermes-autonomia
 maintainers:
   - FN: Russell Ballestrini
     url: https://linkpeek.com
   - FN: dcn13l
     url: https://github.com/dcn13l/hermes-autonomia
-  - FN: Abbas-Hoseiny
-    url: https://github.com/Abbas-Hoseiny/linkpeek
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 85
-  at: '2026-08-09T20:44:31.322Z'
+  confidence: 88
+  at: '2026-08-09T13:22:35.908Z'
+common:
+- type: AgenticAccess
+  url: agentic-access/linkpeek-agentic-access.yml
+- type: DomainSecurity
+  url: security/linkpeek-domain-security.yml
+- type: Authentication
+  url: authentication/linkpeek-authentication.yml
+- type: Packages
+  url: packages/linkpeek-packages.yml
+- type: SDKs
+  url: packages/linkpeek-packages.yml
+- type: LLMsTxt
+  url: llms/linkpeek-llms.txt
+- type: Conventions
+  url: conventions/linkpeek-conventions.yml
+- type: ErrorCatalog
+  url: errors/linkpeek-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/linkpeek-lifecycle.yml
+- type: Conformance
+  url: conformance/linkpeek-conformance.yml
+- type: DataModel
+  url: data-model/linkpeek-data-model.yml
+- type: RateLimits
+  url: rate-limits/linkpeek-rate-limits.yml
+- type: Plans
+  url: plans/linkpeek-plans.yml
+- type: ChangeLog
+  url: changelog/linkpeek-changelog.yml
+- type: ChangeLog
+  url: https://github.com/dcn13l/hermes-autonomia/releases
+- type: AgentSkill
+  url: skills/_index.yml
+- type: VulnerabilityDisclosure
+  url: security/linkpeek-vulnerability-disclosure.yml
+- type: Security
+  url: https://github.com/dcn13l/hermes-autonomia/security
+- type: GitHubOrganization
+  url: https://github.com/dcn13l
+- type: Support
+  url: https://github.com/dcn13l/hermes-autonomia/discussions
+- type: Pricing
+  url: https://147.15.103.217.sslip.io/api/pricing
+- type: SignUp
+  url: https://147.15.103.217.sslip.io/api/key
+
+x-identity-note: >-
+  This repository currently profiles TWO unrelated organizations that share the name "LinkPeek",
+  merged by a community submission on 2026-08-09. (1) LinkPeek.com — a commercial webpage
+  screenshot service operating from New London, Connecticut since 2011 ("over 19 million
+  screenshots served"), API at https://linkpeek.com/api/v1, plans $20–$180/month, maintainer
+  Russell Ballestrini. (2) The "LinkPeek API" at 147.15.103.217.sslip.io — an MIT-licensed
+  open-source Flask side project (github.com/dcn13l/hermes-autonomia, repository created
+  2026-08-05) offering ~107 URL-utility routes on a $1/month Pro tier. Both were verified live on
+  2026-08-09 and both are real; they are not the same provider, share no infrastructure, and
+  should be split into separate catalog entries. Every artifact in this repository except the
+  LinkPeek Screenshot API entry describes provider (2).
+
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

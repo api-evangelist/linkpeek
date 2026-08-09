@@ -1,0 +1,67 @@
+generated: '2026-08-09'
+method: searched
+source: https://github.com/dcn13l/hermes-autonomia/releases
+format: github-releases
+scheme: semver
+current_version: 1.28.0
+current_version_source: 'GET https://147.15.103.217.sslip.io/api/status (200, read 2026-08-09)'
+note: >-
+  The changelog is the GitHub Releases feed on the source repository — there is no changelog page
+  on the API host and no RSS/Atom changelog feed. Release tags (v1.5.0 → v2.9.0) do not line up
+  with the version the running service reports (1.28.0) or the version in the published OpenAPI
+  (1.19.1); all three are recorded rather than reconciled. Every release below is dated and its
+  highlights come verbatim from the provider's own release notes. Note the compressed timeline:
+  the repository was created 2026-08-05 and five releases shipped within four days, so this is a
+  release feed in flux, not a stabilised product history.
+entries:
+  - version: v2.9.0
+    date: '2026-08-09'
+    title: 92 free link-preview + dev-utility endpoints
+    url: https://github.com/dcn13l/hermes-autonomia/releases/tag/v2.9.0
+    additions:
+      - 9 new developer-utility endpoints, bringing the advertised total to 92
+    breaking: []
+  - version: v2.8.0
+    date: '2026-08-09'
+    title: '83 endpoints (link preview, QR, DNS, wayback, whois, tech-stack); $1/mo Pro'
+    url: https://github.com/dcn13l/hermes-autonomia/releases/tag/v2.8.0
+    additions:
+      - '/api/color-palette — dominant colors from a page image'
+      - '/api/language-detect — detect URL/document language'
+      - '/api/readability — extract main readable article text'
+      - '/api/shortlink plus /lp/<code> — create and resolve short links'
+      - 14 new endpoints in total, bringing the advertised count to 83
+    breaking: []
+  - version: v2.1.0
+    date: '2026-08-09'
+    title: Security-hardened developer utility API
+    url: https://github.com/dcn13l/hermes-autonomia/releases/tag/v2.1.0
+    additions:
+      - Input validation and parameter sanitisation on all endpoints
+      - Caching system
+      - Monetization endpoints
+      - Endpoint catalogue expanded past 69
+    breaking: []
+  - version: v1.5.0
+    date: '2026-08-08'
+    title: Free link preview + QR code + 69 dev-utility endpoints
+    url: https://github.com/dcn13l/hermes-autonomia/releases/tag/v1.5.0
+    additions:
+      - Link Preview API returning OG metadata as JSON
+      - QR code PNG generator
+      - 69+ developer utility endpoints (DNS lookup, SSL check, UUID, timestamp, base64, hash)
+    breaking: []
+  - version: v1.6.1
+    date: '2026-08-06'
+    title: Stability and hardening
+    url: https://github.com/dcn13l/hermes-autonomia/releases/tag/v1.6.1
+    additions:
+      - 'QR endpoint returns a structured JSON 503 when Pillow is missing (was a 500)'
+      - Favicon fetch body capped at 5 MiB for DoS protection
+      - Tech-stack detection roughly 2x faster
+      - Trial-days import fixed so the response reports the correct 14-day duration
+    breaking: []
+    note: >-
+      Published out of sequence relative to the tag ordering, and quotes a $5/mo Pro price and 29
+      endpoints — both superseded by the later releases ($1/mo, 92 endpoints). Recorded as
+      published.

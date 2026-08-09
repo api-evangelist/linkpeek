@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the LinkPeek API
+  version: 1.0.0
+extends: openapi/linkpeek-openapi-original.yml
+x-provenance:
+  generated: '2026-08-09'
+  method: generated
+  source: openapi/linkpeek-openapi-original.yml
+  note: >-
+    Captures API Evangelist's corrections and additions without mutating the harvested spec. The
+    two substantive fixes are (a) the declared server, which points at port :5000 while the live
+    marketed host answers on the default 443 (both verified 2026-08-09), and (b) operationIds,
+    which the published spec omits entirely for all 16 operations — this blocks Arazzo workflows,
+    SDK generation, and MCP tool binding. Everything asserted here was observed live; nothing is
+    invented.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/linkpeek/
+      x-apievangelist-reviewed: '2026-08-09'
+      x-spec-lag: >-
+        Spec info.version is 1.19.1 while the live service reports 1.28.0 at /api/status, and the
+        spec documents 16 of the 107 registered routes.
+  - target: $.info
+    update:
+      license:
+        name: MIT
+        url: https://github.com/dcn13l/hermes-autonomia/blob/main/LICENSE
+  - target: $
+    update:
+      externalDocs:
+        description: Source repository, README, and full endpoint cheatsheet
+        url: https://github.com/dcn13l/hermes-autonomia
+  - target: $.servers
+    update:
+      - url: https://147.15.103.217.sslip.io
+        description: >-
+          Live production server on the default HTTPS port — verified 200 on 2026-08-09. The
+          spec's declared https://147.15.103.217.sslip.io:5000 is the origin app port; use this
+          host in generated clients.
+  - target: $.paths['/api/preview'].get
+    update: {operationId: getLinkPreview}
+  - target: $.paths['/api/qr'].get
+    update: {operationId: generateQrPng}
+  - target: $.paths['/api/qrcode'].get
+    update: {operationId: generateQrJson}
+  - target: $.paths['/api/favicon-extractor'].get
+    update: {operationId: extractFavicons}
+  - target: $.paths['/api/favicons'].get
+    update: {operationId: proxyFavicon}
+  - target: $.paths['/api/meta-tag-parser'].get
+    update: {operationId: parseMetaTags}
+  - target: $.paths['/api/extract'].get
+    update: {operationId: extractPage}
+  - target: $.paths['/api/metadata-full'].get
+    update: {operationId: getMetadataFull}
+  - target: $.paths['/api/batch'].get
+    update: {operationId: batchPreview}
+  - target: $.paths['/api/headers'].get
+    update: {operationId: getResponseHeaders}
+  - target: $.paths['/api/og-image'].get
+    update: {operationId: generateOgImage}
+  - target: $.paths['/api/status'].get
+    update: {operationId: getServiceStatus}
+  - target: $.paths['/api/health'].get
+    update: {operationId: getHealth}
+  - target: $.paths['/api/health/json'].get
+    update: {operationId: getHealthJson}
+  - target: $.paths['/api/key'].get
+    update: {operationId: issueTrialKey}
+  - target: $.paths['/api/subscribe'].get
+    update: {operationId: subscribePro}

@@ -1,0 +1,55 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://147.15.103.217.sslip.io/api/status, https://147.15.103.217.sslip.io/api/health,
+  https://github.com/dcn13l/hermes-autonomia/releases, https://147.15.103.217.sslip.io/openapi.yaml
+versioning:
+  scheme: semver-in-band
+  current: 1.28.0
+  spec_version: 1.19.1
+  release_tags: [v2.9.0, v2.8.0, v2.1.0, v1.6.1, v1.5.0]
+  docs: https://github.com/dcn13l/hermes-autonomia/releases
+  note: >-
+    Three version namespaces disagree. `GET /api/status` reports service version 1.28.0, the
+    published OpenAPI declares info.version 1.19.1, and the GitHub release tags run v1.5.0 →
+    v2.9.0. No URL path carries a version, so clients cannot pin one. Both were read live on
+    2026-08-09.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation or sunset policy exists. No RFC 8594 `Sunset` or `Deprecation` header was
+    observed on any probed response, and no operation in the spec carries `deprecated: true`.
+    Because paths are unversioned and the spec trails the running build by nine minor versions,
+    a removed endpoint would break clients with no announced notice period.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA, uptime target, or support-response commitment is published — for the $1/month Pro tier
+    or otherwise. The service self-describes as an open-source side project on Oracle Cloud Free
+    Tier; the GitHub repository was created 2026-08-05.
+status_page: null
+status_endpoints:
+  - {url: 'https://147.15.103.217.sslip.io/api/status', status: 200, returns: 'service, version, uptime_seconds, ok, free/pro daily limits, full route index'}
+  - {url: 'https://147.15.103.217.sslip.io/api/health', status: 200, returns: 'ok plus today''s request count'}
+  - {url: 'https://147.15.103.217.sslip.io/api/health/json', status: 200, returns: 'machine-friendly fixed-structure health'}
+status_page_note: >-
+  These are in-band health endpoints served by the API itself, not an independent status page —
+  they go down with the service they report on, and carry no incident history, no subscribe
+  channel, and no historical uptime. No `type: StatusPage` pointer is wired, because there is no
+  status page to point at.
+maturity:
+  stage: hobby
+  evidence:
+    - Single raw-IP sslip.io hostname with no owned domain
+    - Oracle Cloud Free Tier hosting, self-declared in the provider profile
+    - GitHub repository created 2026-08-05, 1 star, 2 open issues
+    - 'Spec contact email is the placeholder linkpeek@example.com'
+  note: >-
+    Recorded as operational risk, not as criticism — an integrator should size the dependency
+    accordingly. The code is MIT-licensed and self-hostable, which is the mitigation the provider
+    itself points to.

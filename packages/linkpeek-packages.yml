@@ -1,0 +1,59 @@
+generated: '2026-08-09'
+method: searched
+source: https://github.com/dcn13l/hermes-autonomia
+notes: >-
+  LinkPeek ships two first-party client libraries as SOURCE in its own GitHub repository, but
+  neither is published to a public package registry — npm `linkpeek-api` returned 404 and PyPI
+  `linkpeek-api` returned 404 on 2026-08-09. They are installable only from the repository. The
+  npm package `linkpeek` (2.1.2) that DOES exist on the registry is an unrelated third-party
+  link-preview library by Adrian Gruber (github.com/thegruber/linkpeek) — it is not a client for
+  this API and is recorded below with `official: false` so it is never mistaken for one.
+packages:
+  - language: javascript
+    registry: none
+    name: linkpeek-api
+    version: 2.1.0
+    url: https://github.com/dcn13l/hermes-autonomia/tree/main/npm-sdk
+    install: 'not published — vendor npm-sdk/ from the repository'
+    official: true
+    published: false
+    license: MIT
+    description: >-
+      Zero-dependency Node.js SDK for the LinkPeek API (index.js + index.d.ts). package.json
+      declares `"repository": "https://github.com/linkpeek/linkpeek-api-node"`, a GitHub org that
+      does not host the code today; the source of record is npm-sdk/ in hermes-autonomia.
+    x-evidence:
+      registry_probe: https://registry.npmjs.org/linkpeek-api
+      registry_status: 404
+      fetched: '2026-08-09'
+  - language: python
+    registry: none
+    name: linkpeek-api
+    version: 0.1.0
+    url: https://github.com/dcn13l/hermes-autonomia/tree/main/pypi-sdk
+    install: 'not published — pip install from the repository subdirectory'
+    official: true
+    published: false
+    license: MIT
+    description: >-
+      Thin Python client for the LinkPeek link-preview + QR-code API (pypi-sdk/linkpeek.py) with
+      a pyproject.toml ready to build, a test suite, and a bundled api-spec/openapi.yaml subset.
+    x-evidence:
+      registry_probe: https://pypi.org/pypi/linkpeek-api/json
+      registry_status: 404
+      fetched: '2026-08-09'
+third_party:
+  - language: javascript
+    registry: npm
+    name: linkpeek
+    version: 2.1.2
+    url: https://www.npmjs.com/package/linkpeek
+    official: false
+    note: >-
+      Unrelated project — a standalone Open Graph / Twitter Card / JSON-LD extractor by Adrian
+      Gruber. Name collision only; it does not call this API.
+registries_probed:
+  - {registry: npm, name: linkpeek-api, status: 404}
+  - {registry: npm, name: linkpeek, status: 200, first_party: false}
+  - {registry: pypi, name: linkpeek-api, status: 404}
+  - {registry: pypi, name: linkpeek, status: 404}

@@ -1,0 +1,51 @@
+generated: '2026-08-09'
+method: searched
+source: 'https://147.15.103.217.sslip.io/api/pricing (200, read 2026-08-09)'
+note: >-
+  LinkPeek publishes its pricing as a machine-readable JSON endpoint rather than a pricing page —
+  `GET /api/pricing` returns currency, current Pro price, and the full plan array. Captured
+  verbatim below. Payment is collected through a PayPal link returned by
+  `GET /api/subscribe?email=`; there is no hosted checkout, no card processor, and no account
+  dashboard.
+currency: USD
+plans:
+  - id: free
+    name: Free
+    price: 0.0
+    billing_cycle: month
+    auth: none (metered per IP)
+    daily_limit: 100
+    features:
+      - 100 requests/day
+      - No API key required
+      - All /api/* preview endpoints
+      - Community support
+  - id: trial
+    name: Trial
+    price: 0.0
+    billing_cycle: 14 days
+    auth: 'API key (issued at /api/key?email=…)'
+    daily_limit: 50000
+    features:
+      - 50000 requests/day for 14 days
+      - Pro API key included
+      - No credit card required
+      - Auto-expires to Free afterwards
+  - id: pro
+    name: Pro
+    price: 1.0
+    billing_cycle: month
+    auth: 'API key (issued at /api/subscribe?email=…)'
+    daily_limit: 50000
+    features:
+      - 50000 requests/day
+      - Non-expiring API key
+      - Priority email support
+      - All endpoints including /api/extract and /api/metadata-full
+subscribe_url: https://147.15.103.217.sslip.io/api/subscribe
+payment_method: paypal
+enforcement_note: >-
+  Per the provider's README, a Pro key is minted and works immediately at issue time; `paid:false`
+  in the operator's keys store is a manual reconciliation flag flipped once the PayPal
+  notification arrives. Entitlement is therefore granted before payment is verified — recorded
+  because it is a real operational property of the plan, disclosed by the provider itself.

@@ -1,0 +1,29 @@
+generated: '2026-08-09'
+method: probed
+source: live GET of the /.well-known/ surface on every host in apis.yml
+note: >-
+  Nothing found. Every /.well-known/ path on both hosts returned 404 — the API host answers with
+  a JSON 404 body (not an HTML catch-all, so these are true negatives, not soft-404s), and
+  linkpeek.com answers with a 534-byte HTML 404 page. No pointer is wired into apis.yml because
+  no discovery document exists. Recorded as negative evidence so a later round does not re-probe
+  blind.
+hosts:
+  - host: https://147.15.103.217.sslip.io
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /robots.txt, status: 200, file: null, note: 'present but not a /.well-known/ document'}
+      - {path: /sitemap.xml, status: 200, file: null, note: 'present but not a /.well-known/ document'}
+  - host: https://linkpeek.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /robots.txt, status: 200, file: null, note: 'present but not a /.well-known/ document'}

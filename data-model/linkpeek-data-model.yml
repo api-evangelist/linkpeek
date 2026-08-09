@@ -1,0 +1,99 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/linkpeek-openapi-original.yml
+note: >-
+  LinkPeek is a stateless transformation API, not a resource API. Its OpenAPI declares 13 schemas
+  and they are response envelopes, not persisted entities — there is no create/read/update/delete
+  cycle, no server-side identifiers to reference, and therefore almost no entity graph. The only
+  real relationships are composition (`$ref` embedding) inside single responses. Recorded as
+  derived so the shape of the API is on record rather than an empty file implying a missing graph.
+shape: stateless-transformation
+entities:
+  - name: PreviewResponse
+    kind: response-envelope
+    domain: link-preview
+    fields: [title, description, image, site_name, favicon, url, quota]
+    produced_by: ['GET /api/preview']
+  - name: Quota
+    kind: embedded-value
+    domain: metering
+    fields: [plan, limit, used, remaining, reset_iso]
+    note: Appended to metered responses; the only schema reused across responses.
+  - name: ErrorResponse
+    kind: error-envelope
+    domain: errors
+    fields: [error, url, detail, max, got]
+    cross_reference: errors/linkpeek-problem-types.yml
+  - name: QrJsonResponse
+    kind: response-envelope
+    domain: qr
+    produced_by: ['GET /api/qrcode']
+  - name: Icon
+    kind: embedded-value
+    domain: favicon
+  - name: FaviconExtractorResponse
+    kind: response-envelope
+    domain: favicon
+    produced_by: ['GET /api/favicon-extractor']
+  - name: MetaTag
+    kind: embedded-value
+    domain: meta-tags
+  - name: LinkTag
+    kind: embedded-value
+    domain: meta-tags
+  - name: MetaTagParserResponse
+    kind: response-envelope
+    domain: meta-tags
+    produced_by: ['GET /api/meta-tag-parser']
+  - name: RouteInfo
+    kind: embedded-value
+    domain: discovery
+    fields: [path, methods]
+  - name: StatusResponse
+    kind: response-envelope
+    domain: discovery
+    fields: [ok, service, version, uptime_seconds, endpoints, free_daily_limit, pro_daily_limit, docs, health]
+    produced_by: ['GET /api/status']
+  - name: HealthResponse
+    kind: response-envelope
+    domain: discovery
+    produced_by: ['GET /api/health']
+  - name: OgImageResponse
+    kind: response-envelope
+    domain: link-preview
+    produced_by: ['GET /api/og-image']
+relationships:
+  - from: PreviewResponse
+    to: Quota
+    type: has_one
+    via: quota
+    binding: '$ref'
+  - from: FaviconExtractorResponse
+    to: Icon
+    type: has_many
+    binding: '$ref array'
+  - from: MetaTagParserResponse
+    to: MetaTag
+    type: has_many
+    binding: '$ref array'
+  - from: MetaTagParserResponse
+    to: LinkTag
+    type: has_many
+    binding: '$ref array'
+  - from: StatusResponse
+    to: RouteInfo
+    type: has_many
+    via: endpoints
+    binding: '$ref array'
+identifiers:
+  - name: api key
+    prefix: lp_pro_
+    scope: 'Pro keys, per the ApiKeyAuth scheme description in the spec'
+    persisted: true
+    note: The only server-persisted object in the documented surface.
+  - name: short code
+    scope: 'base62 short-link codes resolved at GET /lp/<code>'
+    persisted: true
+    note: >-
+      Present on the live route index and described in the README, but not in the published
+      OpenAPI, so no schema is available.

@@ -1,0 +1,46 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://147.15.103.217.sslip.io/api/pricing (200), https://147.15.103.217.sslip.io/api/status
+  (200), https://147.15.103.217.sslip.io/openapi.yaml (200)
+signaling:
+  headers: []
+  in_body: true
+  body_field: quota
+  body_fields: [plan, limit, used, remaining, reset_iso]
+  exhausted_status: 429
+  retry_after_header: false
+  note: >-
+    Quota is reported in the response body on metered endpoints, never in headers. A 429 carries
+    no Retry-After; the reset time is only available from `quota.reset_iso` on an earlier
+    successful response.
+rate_limits:
+  - plan: free
+    scope: per-ip
+    limit_count: 100
+    interval: day
+    auth: none
+    note: No API key and no signup; metering is by source IP address.
+  - plan: trial
+    scope: per-api-key
+    limit_count: 50000
+    interval: day
+    auth: 'api key on ?key='
+    duration: 14 days
+    note: 'Issued self-serve at GET /api/key?email=; auto-expires back to Free.'
+  - plan: pro
+    scope: per-api-key
+    limit_count: 50000
+    interval: day
+    auth: 'api key on ?key='
+    note: 'Issued at GET /api/subscribe?email=; non-expiring key, $1/month.'
+unmetered:
+  - /api/status
+  - /api/health
+  - /api/health/json
+  - /api/pricing
+overage_policy: null
+overage_note: >-
+  No burst allowance, per-second ceiling, concurrency limit or overage policy is published — only
+  the daily counter. The provider's README describes per-IP throttling with "clear 429 responses"
+  but publishes no numbers for it.
