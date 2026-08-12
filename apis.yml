@@ -39,89 +39,157 @@ tags:
   - data-conversion
   - openai-compatible-llm
 apis:
-  - name: LinkPeek Screenshot API
-    description: >-
-      HTTP/REST-style image API: request a target URL with parameters (e.g. size=original, viewport flags) and receive a
-      webpage screenshot image. API-key authenticated; paid plans from $20/month.
-    humanURL: https://linkpeek.com/docs
-    baseURL: https://linkpeek.com/api/v1
-    tags:
-      - screenshots
-      - webpage-capture
-      - website-thumbnails
-      - image-generation
-      - rendering
-      - web-scraping-adjacent
-      - developer-tools
-      - saas
-      - rest-image-api
-    properties:
-      - type: Documentation
-        url: https://linkpeek.com/docs
-      - type: APIReference
-        url: https://linkpeek.com/docs/request-options
-      - type: DeveloperPortal
-        url: https://linkpeek.com/
-      - type: Pricing
-        url: https://linkpeek.com/how-much-does-linkpeek-cost
-      - type: Login
-        url: https://linkpeek.com/login
-      - type: Support
-        url: https://linkpeek.com/contact
-      - type: Blog
-        url: https://linkpeek.com/blog
-  - name: LinkPeek API
-    description: >-
-      REST API with ~92 endpoints for URL intelligence, QR codes, DNS/WHOIS/SSL, and developer utilities. Optional API
-      key via query parameter; free tier metered per IP. Also exposes an OpenAI-compatible chat/completions surface.
-    humanURL: https://147.15.103.217.sslip.io
-    baseURL: https://147.15.103.217.sslip.io
-    tags:
-      - Developer Tools
-      - Utility API
-      - URL Metadata
-      - Link Preview
-      - OpenGraph
-      - QR Code Generation
-      - DNS
-      - WHOIS
-      - SSL
-      - Web Security Scanning
-      - IP Geolocation
-      - Data Conversion
-      - LLM-Compatible API
-      - developer-tools
-      - api-utilities
-      - url-metadata
-      - link-preview
-      - qr-code-generation
-      - dns-whois
-      - web-security-scanning
-      - data-conversion
-      - openai-compatible-llm
-    properties:
-      - type: OpenAPI
-        url: openapi/linkpeek-openapi-original.yml
-      - type: OpenAPI
-        url: https://147.15.103.217.sslip.io/openapi.yaml
-      - type: OpenAPI
-        url: https://github.com/dcn13l/hermes-autonomia/blob/main/openapi.yaml
-      - type: Overlay
-        url: overlays/linkpeek-openapi-overlay.yaml
-      - type: PostmanCollection
-        url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
-      - type: Documentation
-        url: https://147.15.103.217.sslip.io
-      - type: Documentation
-        url: https://147.15.103.217.sslip.io/api/status
-      - type: APIReference
-        url: https://147.15.103.217.sslip.io/api/status
-      - type: DeveloperPortal
-        url: https://147.15.103.217.sslip.io
-      - type: GettingStarted
-        url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
-      - type: SourceCode
-        url: https://github.com/dcn13l/hermes-autonomia
+- name: LinkPeek Screenshot API
+  description: >-
+    HTTP/REST-style image API: request a target URL with parameters (e.g. size=original, viewport flags)
+    and receive a webpage screenshot image. API-key authenticated; paid plans from $20/month.
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - screenshots
+  - webpage-capture
+  - website-thumbnails
+  - image-generation
+  - rendering
+  - web-scraping-adjacent
+  - developer-tools
+  - saas
+  - rest-image-api
+  properties:
+  - type: Documentation
+    url: https://linkpeek.com/docs
+  - type: APIReference
+    url: https://linkpeek.com/docs/request-options
+  - type: DeveloperPortal
+    url: https://linkpeek.com/
+  - type: Pricing
+    url: https://linkpeek.com/how-much-does-linkpeek-cost
+  - type: Login
+    url: https://linkpeek.com/login
+  - type: Support
+    url: https://linkpeek.com/contact
+  - type: Blog
+    url: https://linkpeek.com/blog
+- aid: linkpeek:linkpeek-favicon-api
+  name: LinkPeek Favicon API
+  description: Favicon discovery and extraction
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - Favicon
+  properties:
+  - type: OpenAPI
+    url: openapi/linkpeek-favicon-api-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: APIReference
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: DeveloperPortal
+    url: https://147.15.103.217.sslip.io
+  - type: GettingStarted
+    url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+  - type: SourceCode
+    url: https://github.com/dcn13l/hermes-autonomia
+- aid: linkpeek:linkpeek-link-preview-api
+  name: LinkPeek Link Preview API
+  description: URL metadata and link-card extraction
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - Link Preview
+  properties:
+  - type: OpenAPI
+    url: openapi/linkpeek-link-preview-api-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: APIReference
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: DeveloperPortal
+    url: https://147.15.103.217.sslip.io
+  - type: GettingStarted
+    url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+  - type: SourceCode
+    url: https://github.com/dcn13l/hermes-autonomia
+- aid: linkpeek:linkpeek-meta-tags-api
+  name: LinkPeek Meta Tags API
+  description: HTML head meta and link tag parsing
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - Meta Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/linkpeek-meta-tags-api-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: APIReference
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: DeveloperPortal
+    url: https://147.15.103.217.sslip.io
+  - type: GettingStarted
+    url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+  - type: SourceCode
+    url: https://github.com/dcn13l/hermes-autonomia
+- aid: linkpeek:linkpeek-qr-code-api
+  name: LinkPeek QR Code API
+  description: QR code generation (PNG and base64 JSON)
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - QR Code
+  properties:
+  - type: OpenAPI
+    url: openapi/linkpeek-qr-code-api-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: APIReference
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: DeveloperPortal
+    url: https://147.15.103.217.sslip.io
+  - type: GettingStarted
+    url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+  - type: SourceCode
+    url: https://github.com/dcn13l/hermes-autonomia
+- aid: linkpeek:linkpeek-system-api
+  name: LinkPeek System API
+  description: Service health, status, and discovery
+  humanURL: https://linkpeek.com/docs
+  baseURL: https://linkpeek.com/api/v1
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/linkpeek-system-api-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/dcn13l/hermes-autonomia/blob/main/linkpeek-postman.json
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io
+  - type: Documentation
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: APIReference
+    url: https://147.15.103.217.sslip.io/api/status
+  - type: DeveloperPortal
+    url: https://147.15.103.217.sslip.io
+  - type: GettingStarted
+    url: https://github.com/dcn13l/hermes-autonomia#quickstart-no-signup
+  - type: SourceCode
+    url: https://github.com/dcn13l/hermes-autonomia
 maintainers:
   - FN: Russell Ballestrini
     url: https://linkpeek.com
@@ -133,6 +201,10 @@ generated:
   confidence: 88
   at: '2026-08-09T13:22:35.908Z'
 common:
+- type: MCPServer
+  url: mcp/linkpeek-mcp.yml
+- type: Overlay
+  url: overlays/linkpeek-openapi-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/linkpeek-agentic-access.yml
 - type: DomainSecurity
