@@ -3,7 +3,7 @@ description: >-
   A developer utility REST API bundling ~92 JSON endpoints for URL intelligence (link preview, metadata, OpenGraph), QR
   generation, DNS/WHOIS/SSL security checks, and data-conversion dev tools. Includes an OpenAI-compatible
   chat/completions surface. Hobby-grade service hosted on Oracle Cloud Free Tier via a raw-IP sslip.io hostname.
-url: https://linkpeek.apievangelist.com/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
 created: '2026-08-09'
 modified: '2026-08-09'
 specificationVersion: '0.21'
