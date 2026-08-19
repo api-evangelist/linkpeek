@@ -1,0 +1,367 @@
+{
+  "item": [
+    {
+      "id": "731af2ed-d3b6-4141-a464-93b580133904",
+      "name": "Favicon",
+      "description": {
+        "content": "Favicon discovery and extraction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "659754e2-c0fa-411b-b3f4-6ca5334a2b58",
+          "name": "Discover all favicons from a URL",
+          "request": {
+            "name": "Discover all favicons from a URL",
+            "description": {
+              "content": "Parses a page's `<link>` tags and returns every favicon/icon found\n(apple-touch-icon, icon, shortcut icon, etc.) as structured JSON,\nwith document order preserved. Includes a best-guess recommendation\nand a /favicon.ico fallback flag when no link-rel icons exist.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "favicon-extractor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) Target URL to analyze (must include http:// or https://)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "372ef3f3-f285-4459-973e-be14351cf86e",
+              "name": "Favicon extraction successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicon-extractor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://github.com\",\n  \"title\": \"GitHub · Where the world builds software\",\n  \"icon_count\": 3,\n  \"icons\": [\n    {\n      \"rel\": \"icon\",\n      \"href\": \"https://github.githubassets.com/favicons/favicon.svg\",\n      \"sizes\": \"any\",\n      \"type\": \"image/svg+xml\"\n    },\n    {\n      \"rel\": \"apple-touch-icon\",\n      \"href\": \"https://github.githubassets.com/apple-touch-icon.png\",\n      \"sizes\": \"180x180\",\n      \"type\": \"\"\n    }\n  ],\n  \"best_guess\": {\n    \"rel\": \"apple-touch-icon\",\n    \"href\": \"https://github.githubassets.com/apple-touch-icon.png\",\n    \"sizes\": \"180x180\",\n    \"type\": \"\"\n  },\n  \"favicon_ico_fallback\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dafaae5-30ad-444e-a60e-37b606f661e0",
+              "name": "Missing or invalid URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicon-extractor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 7887,\n  \"got\": 2461\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18d35e1a-748e-48c8-8f2a-fa3d798eb1b0",
+              "name": "Failed to fetch the target URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicon-extractor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 7887,\n  \"got\": 2461\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b823b1a-12a3-4ab8-b3a2-b14b340479d4",
+          "name": "Proxy favicon image bytes",
+          "request": {
+            "name": "Proxy favicon image bytes",
+            "description": {
+              "content": "Returns the raw favicon image bytes for a URL (proxied to avoid CORS issues in browser clients).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "favicons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) Target URL to analyze (must include http:// or https://)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c324ac2a-6d31-42fe-8efa-bdb58519c23b",
+              "name": "Favicon image bytes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1114208d-61c6-4927-a7d9-a91360abd279",
+              "name": "Missing or invalid URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 7887,\n  \"got\": 2461\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "901874d6-c5e7-420b-b29e-4fa9e0b674ee",
+              "name": "Fetch failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "favicons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://github.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 7887,\n  \"got\": 2461\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://147.15.103.217.sslip.io:5000",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "fd1b4e20-6fb0-44db-8a9e-0a71ba983a88",
+    "name": "LinkPeek Favicon API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Free, open-source URL preview and QR code API. Turn any URL into a clean\nJSON link-preview card and any string into a QR code — no signup, no API\nkey required for the free tier (100 requests/day per IP).\n\n77+ developer utility endpoints covering link previews, QR codes,\nfavicons, meta tags, DNS, SSL, security checks, and developer tools.\nBuilt for Discord/Telegram/Slack bots, bookmark apps, social clients,\nand anyone who needs link metadata without signup friction.\n\n**Quickstart:**\n```\ncurl \"https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com\"\n```\n\n**Pricing:**\n- **Free** — 100 req/day, no auth, just call the endpoint.\n- **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.\n- **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.\n\nPro keys work immediately; attach `?key=lp_pro_...` to any metered\nendpoint to lift the daily quota to 50,000.\n\n\nContact Support:\n Name: LinkPeek\n Email: linkpeek@example.com",
+      "type": "text/plain"
+    }
+  }
+}

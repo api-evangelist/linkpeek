@@ -1,0 +1,503 @@
+{
+  "item": [
+    {
+      "id": "0043307c-185f-44a5-bba9-1d8600fecb35",
+      "name": "System",
+      "description": {
+        "content": "Service health, status, and discovery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7108ec86-6ed3-411e-a784-3541a39e63fb",
+          "name": "Service manifest and endpoint catalogue",
+          "request": {
+            "name": "Service manifest and endpoint catalogue",
+            "description": {
+              "content": "Self-describing service manifest — returns the current version,\nuptime, and the full list of dynamically-registered API routes\nwith their allowed methods. Unmetered (no rate limit). The\ncanonical discovery endpoint for SDK clients and landing pages.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06cfba12-9a8e-4135-af41-b9182a2b9f49",
+              "name": "Service status and route inventory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"service\": \"LinkPeek\",\n  \"version\": \"1.19.1\",\n  \"uptime_seconds\": 86412.5,\n  \"endpoints\": [\n    {\n      \"path\": \"/api/preview\",\n      \"methods\": [\n        \"GET\"\n      ]\n    },\n    {\n      \"path\": \"/api/qr\",\n      \"methods\": [\n        \"GET\"\n      ]\n    },\n    {\n      \"path\": \"/api/status\",\n      \"methods\": [\n        \"GET\"\n      ]\n    }\n  ],\n  \"free_daily_limit\": 100,\n  \"pro_daily_limit\": 50000,\n  \"docs\": \"/api/status\",\n  \"health\": \"/api/health\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39f3259c-384b-41d9-a6db-e350735aa795",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Lightweight health check. Returns service status, today's request\ncount, and the active revenue/payment method. Suitable for\nuptime monitoring and load balancer health probes.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21b3a4e3-c308-4609-9fd5-f0b47fff63c3",
+              "name": "Service is healthy.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"today\": {\n    \"day\": \"2026-08-09\",\n    \"count\": 1542\n  },\n  \"revenue\": {\n    \"pro_price_usd\": 1,\n    \"pay_method\": \"paypal\",\n    \"subscribe_url\": \"/api/subscribe?email=…\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2bac687-b52e-4270-bebb-99797742be6b",
+          "name": "Issue a 14-day trial API key",
+          "request": {
+            "name": "Issue a 14-day trial API key",
+            "description": {
+              "content": "Issues a free 14-day trial API key (50,000 req/day), returned in\nthe JSON response. No payment required.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) Email address to associate with the trial key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84758a25-d79c-4126-8a0f-99461b85c9b7",
+              "name": "Trial key issued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_key\": \"string\",\n  \"plan\": \"trial\",\n  \"trial_days\": 14,\n  \"expires\": \"2016-05-29T02:49:05.224Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "167ad0fe-4ee2-42e6-b0ef-92ed6012304e",
+              "name": "Missing or invalid email.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 5091,\n  \"got\": 2021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c087097c-9092-46c5-9bc3-a70d3380626b",
+          "name": "Subscribe to Pro ($1/mo) and mint a Pro API key",
+          "request": {
+            "name": "Subscribe to Pro ($1/mo) and mint a Pro API key",
+            "description": {
+              "content": "Mints a Pro API key (50,000 req/day, never expires) and returns\na self-serve payment link (Stripe, PayPal, or manual email).\nThe key works immediately — `paid:false` is a reconciliation flag\nthe operator flips to true when the PayPal/Stripe notification arrives.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) Email address for the Pro account."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d8ac8a8-a5a6-40b9-a175-64ad8f5b350e",
+              "name": "Pro key minted with payment instructions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_key\": \"string\",\n  \"pay_url\": \"http://RBCh.fspoTX,fSIrBKRkcCrRxbCmut9YpMDLJPANXYrA0KNi1zC2uu\",\n  \"pay_method\": \"paypal\",\n  \"price_usd\": 1,\n  \"instructions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae511343-dfbd-4208-b6a1-519cdaae5607",
+              "name": "Missing or invalid email.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"url\": \"string\",\n  \"detail\": \"string\",\n  \"max\": 5091,\n  \"got\": 2021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8433affb-007b-45a6-bd55-53343a2433be",
+          "name": "Machine-friendly health (fixed structure)",
+          "request": {
+            "name": "Machine-friendly health (fixed structure)",
+            "description": {
+              "content": "Fixed-structure health check omitting human-readable adapters\n(currency symbols, subscribe_url). Returns ok, version, uptime,\ntoday's count, now_iso, and endpoint_count.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "health",
+                "json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ae307ef-dc1e-4ac2-9066-28a52c3ef8b4",
+              "name": "Machine-friendly health info.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "health",
+                    "json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"service\": \"string\",\n  \"version\": \"string\",\n  \"uptime_seconds\": 6589.689818129206,\n  \"today\": {\n    \"day\": \"string\",\n    \"count\": 4731\n  },\n  \"now_iso\": \"1990-01-29T10:10:05.241Z\",\n  \"free_daily_limit\": 3352,\n  \"pro_daily_limit\": 7128,\n  \"endpoint_count\": 3105\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://147.15.103.217.sslip.io:5000",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "6e53ec89-70d3-420a-af2b-6bc0392d8822",
+    "name": "LinkPeek System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Free, open-source URL preview and QR code API. Turn any URL into a clean\nJSON link-preview card and any string into a QR code — no signup, no API\nkey required for the free tier (100 requests/day per IP).\n\n77+ developer utility endpoints covering link previews, QR codes,\nfavicons, meta tags, DNS, SSL, security checks, and developer tools.\nBuilt for Discord/Telegram/Slack bots, bookmark apps, social clients,\nand anyone who needs link metadata without signup friction.\n\n**Quickstart:**\n```\ncurl \"https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com\"\n```\n\n**Pricing:**\n- **Free** — 100 req/day, no auth, just call the endpoint.\n- **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.\n- **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.\n\nPro keys work immediately; attach `?key=lp_pro_...` to any metered\nendpoint to lift the daily quota to 50,000.\n\n\nContact Support:\n Name: LinkPeek\n Email: linkpeek@example.com",
+      "type": "text/plain"
+    }
+  }
+}

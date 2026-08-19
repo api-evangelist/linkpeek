@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LinkPeek Meta Tags API",
+    "version": "1.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meta Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Comprehensive meta and link tag dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/meta-tag-parser",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Target URL to analyze (must include http:// or https://)."
+              }
+            ]
+          },
+          "docs": "Returns a loss-less structured dump of the `<head>` section — every\n`<meta>` tag AND every `<link>` tag in document order (including\nduplicates, http-equiv, charset, itemprop, and nameless tags that\nother endpoints discard). Also includes a deduped summary map,\ncanonical URL, and manifest URL.\n\nUnlike `/api/meta-tags` (first-occurrence only, no link tags) and\n`/api/structured-data` (JSON-LD only), this endpoint preserves the\nfull head structure.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: LinkPeek Meta Tags API
+  description: 'Free, open-source URL preview and QR code API. Turn any URL into a clean
+
+    JSON link-preview card and any string into a QR code — no signup, no API
+
+    key required for the free tier (100 requests/day per IP).
+
+
+    77+ developer utility endpoints covering link previews, QR codes,
+
+    favicons, meta tags, DNS, SSL, security checks, and developer tools.
+
+    Built for Discord/Telegram/Slack bots, bookmark apps, social clients,
+
+    and anyone who needs link metadata without signup friction.
+
+
+    **Quickstart:**
+
+    ```
+
+    curl "https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com"
+
+    ```
+
+
+    **Pricing:**
+
+    - **Free** — 100 req/day, no auth, just call the endpoint.
+
+    - **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.
+
+    - **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.
+
+
+    Pro keys work immediately; attach `?key=lp_pro_...` to any metered
+
+    endpoint to lift the daily quota to 50,000.
+
+    '
+  version: 1.19.1
+  contact:
+    name: LinkPeek
+    url: https://github.com/dcn13l/hermes-autonomia
+    email: linkpeek@example.com
+servers:
+- url: https://147.15.103.217.sslip.io:5000
+  description: Live production server
+security:
+- {}
+- ApiKeyAuth: []
+tags:
+- name: Meta Tags
+  description: HTML head meta and link tag parsing
+paths:
+  /api/meta-tag-parser:
+    get:
+      tags:
+      - Meta Tags
+      summary: Comprehensive meta and link tag dump
+      description: 'Returns a loss-less structured dump of the `<head>` section — every
+
+        `<meta>` tag AND every `<link>` tag in document order (including
+
+        duplicates, http-equiv, charset, itemprop, and nameless tags that
+
+        other endpoints discard). Also includes a deduped summary map,
+
+        canonical URL, and manifest URL.
+
+
+        Unlike `/api/meta-tags` (first-occurrence only, no link tags) and
+
+        `/api/structured-data` (JSON-LD only), this endpoint preserves the
+
+        full head structure.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Meta and link tags extracted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaTagParserResponse'
+              example:
+                url: https://github.com
+                title: GitHub · Where the world builds software
+                meta_count: 42
+                metas:
+                - key: description
+                  content: GitHub is where over 100 million developers...
+                  charset: ''
+                  http_equiv: ''
+                  property: ''
+                  name: description
+                  itemprop: ''
+                - key: og:title
+                  content: 'GitHub: Where the world builds software'
+                  charset: ''
+                  http_equiv: ''
+                  property: og:title
+                  name: ''
+                  itemprop: ''
+                link_count: 5
+                links:
+                - rel: canonical
+                  href: https://github.com
+                  type: ''
+                  sizes: ''
+                  media: ''
+                  hreflang: ''
+                  as: ''
+                  crossorigin: ''
+                - rel: manifest
+                  href: /manifest.json
+                  type: ''
+                  sizes: ''
+                  media: ''
+                  hreflang: ''
+                  as: ''
+                  crossorigin: use-credentials
+                meta_summary:
+                  description: GitHub is where over 100 million developers...
+                  og:title: 'GitHub: Where the world builds software'
+                canonical_url: https://github.com
+                manifest_url: /manifest.json
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Failed to fetch the target URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    MetaTag:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Normalized lookup key (name, property, or http-equiv).
+        content:
+          type: string
+          description: Meta tag content attribute value.
+        charset:
+          type: string
+          description: Charset attribute (if present).
+        http_equiv:
+          type: string
+          description: http-equiv attribute (if present).
+        property:
+          type: string
+          description: property attribute (for OG/Twitter tags).
+        name:
+          type: string
+          description: name attribute (when key came from name).
+        itemprop:
+          type: string
+          description: itemprop attribute (if present).
+    LinkTag:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Link rel attribute (canonical, manifest, alternate, etc.).
+        href:
+          type: string
+          description: Link href attribute (as found in the document).
+        type:
+          type: string
+          description: MIME type attribute (if present).
+        sizes:
+          type: string
+          description: Sizes attribute (if present).
+        media:
+          type: string
+          description: Media attribute (if present).
+        hreflang:
+          type: string
+          description: hreflang attribute (if present).
+        as:
+          type: string
+          description: preload/prefetch "as" attribute (if present).
+        crossorigin:
+          type: string
+          description: crossorigin attribute (if present).
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code or human-readable message.
+        url:
+          type: string
+          description: The URL that was attempted (when applicable).
+        detail:
+          type: string
+          description: Additional context (varies by endpoint).
+        max:
+          type: integer
+          description: Maximum allowed value when a limit is exceeded.
+        got:
+          type: integer
+          description: The submitted value that exceeded the limit.
+    Quota:
+      type: object
+      description: Rate-limit usage info appended to metered responses.
+      properties:
+        plan:
+          type: string
+          enum:
+          - free
+          - trial
+          - pro
+        limit:
+          type: integer
+          description: Daily request limit for the current plan.
+        used:
+          type: integer
+          description: Requests consumed today.
+        remaining:
+          type: integer
+          description: Requests remaining today.
+        reset_iso:
+          type: string
+          format: date-time
+          description: UTC ISO 8601 timestamp when the quota resets.
+    MetaTagParserResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Final resolved URL.
+        title:
+          type: string
+          description: Page <title> text.
+        meta_count:
+          type: integer
+          description: Total number of meta tags.
+        metas:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetaTag'
+          description: Every meta tag in document order (includes duplicates).
+        link_count:
+          type: integer
+          description: Total number of link tags.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkTag'
+          description: Every link tag (canonical, manifest, alternate, preload) in order.
+        meta_summary:
+          type: object
+          additionalProperties:
+            type: string
+          description: Deduped key→content map (first occurrence wins) for quick lookup.
+        canonical_url:
+          type: string
+          description: Canonical URL from <link rel="canonical"> (empty if absent).
+        manifest_url:
+          type: string
+          description: Web app manifest URL from <link rel="manifest"> (empty if absent).
+        quota:
+          $ref: '#/components/schemas/Quota'
+  parameters:
+    UrlParam:
+      name: url
+      in: query
+      required: true
+      description: Target URL to analyze (must include http:// or https://).
+      schema:
+        type: string
+        format: uri
+        example: https://github.com
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: 'Optional API key for Trial/Pro tiers (lifts daily quota to 50,000).
+
+        Obtain via `/api/key?email=` (free 14-day trial) or
+
+        `/api/subscribe?email=` (Pro, $1/mo). Free tier requires no key.
+
+        '

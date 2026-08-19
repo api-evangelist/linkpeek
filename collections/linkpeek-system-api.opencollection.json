@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LinkPeek System API",
+    "version": "1.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Service manifest and endpoint catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/status"
+          },
+          "docs": "Self-describing service manifest — returns the current version,\nuptime, and the full list of dynamically-registered API routes\nwith their allowed methods. Unmetered (no rate limit). The\ncanonical discovery endpoint for SDK clients and landing pages.\n"
+        },
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/health"
+          },
+          "docs": "Lightweight health check. Returns service status, today's request\ncount, and the active revenue/payment method. Suitable for\nuptime monitoring and load balancer health probes.\n"
+        },
+        {
+          "info": {
+            "name": "Issue a 14-day trial API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/key",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email address to associate with the trial key."
+              }
+            ]
+          },
+          "docs": "Issues a free 14-day trial API key (50,000 req/day), returned in\nthe JSON response. No payment required.\n"
+        },
+        {
+          "info": {
+            "name": "Subscribe to Pro ($1/mo) and mint a Pro API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/subscribe",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email address for the Pro account."
+              }
+            ]
+          },
+          "docs": "Mints a Pro API key (50,000 req/day, never expires) and returns\na self-serve payment link (Stripe, PayPal, or manual email).\nThe key works immediately — `paid:false` is a reconciliation flag\nthe operator flips to true when the PayPal/Stripe notification arrives.\n"
+        },
+        {
+          "info": {
+            "name": "Machine-friendly health (fixed structure)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/health/json"
+          },
+          "docs": "Fixed-structure health check omitting human-readable adapters\n(currency symbols, subscribe_url). Returns ok, version, uptime,\ntoday's count, now_iso, and endpoint_count.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

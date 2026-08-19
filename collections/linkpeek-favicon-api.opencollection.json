@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LinkPeek Favicon API",
+    "version": "1.19.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Favicon",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Discover all favicons from a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/favicon-extractor",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Target URL to analyze (must include http:// or https://)."
+              }
+            ]
+          },
+          "docs": "Parses a page's `<link>` tags and returns every favicon/icon found\n(apple-touch-icon, icon, shortcut icon, etc.) as structured JSON,\nwith document order preserved. Includes a best-guess recommendation\nand a /favicon.ico fallback flag when no link-rel icons exist.\n"
+        },
+        {
+          "info": {
+            "name": "Proxy favicon image bytes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://147.15.103.217.sslip.io:5000/api/favicons",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Target URL to analyze (must include http:// or https://)."
+              }
+            ]
+          },
+          "docs": "Returns the raw favicon image bytes for a URL (proxied to avoid CORS issues in browser clients)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

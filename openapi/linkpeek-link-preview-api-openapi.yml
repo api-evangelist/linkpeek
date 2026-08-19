@@ -1,0 +1,440 @@
+openapi: 3.2.0
+info:
+  title: LinkPeek Link Preview API
+  description: 'Free, open-source URL preview and QR code API. Turn any URL into a clean
+
+    JSON link-preview card and any string into a QR code — no signup, no API
+
+    key required for the free tier (100 requests/day per IP).
+
+
+    77+ developer utility endpoints covering link previews, QR codes,
+
+    favicons, meta tags, DNS, SSL, security checks, and developer tools.
+
+    Built for Discord/Telegram/Slack bots, bookmark apps, social clients,
+
+    and anyone who needs link metadata without signup friction.
+
+
+    **Quickstart:**
+
+    ```
+
+    curl "https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com"
+
+    ```
+
+
+    **Pricing:**
+
+    - **Free** — 100 req/day, no auth, just call the endpoint.
+
+    - **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.
+
+    - **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.
+
+
+    Pro keys work immediately; attach `?key=lp_pro_...` to any metered
+
+    endpoint to lift the daily quota to 50,000.
+
+    '
+  version: 1.19.1
+  contact:
+    name: LinkPeek
+    url: https://github.com/dcn13l/hermes-autonomia
+    email: linkpeek@example.com
+servers:
+- url: https://147.15.103.217.sslip.io:5000
+  description: Live production server
+security:
+- {}
+- ApiKeyAuth: []
+tags:
+- name: Link Preview
+  description: URL metadata and link-card extraction
+paths:
+  /api/preview:
+    get:
+      tags:
+      - Link Preview
+      summary: Link preview JSON
+      description: 'Fetches a URL, parses its HTML, and returns a clean JSON link-preview
+
+        card (title, description, image, site_name, favicon). The primary
+
+        endpoint for building link cards in bots and apps.
+
+
+        **Free tier:** 100 req/day per IP, no key needed.
+
+        **Pro tier:** 50,000 req/day — append `?key=lp_pro_...`.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Link preview extracted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewResponse'
+              example:
+                title: GitHub · Change is constant
+                description: Where the world builds software.
+                image: https://github.githubassets.com/images/modules/open_graph/github-mark.png
+                site_name: GitHub
+                favicon: https://github.githubassets.com/favicons/favicon.svg
+                url: https://github.com
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Daily rate limit exceeded (free tier) or per-IP throttle.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Failed to fetch the target URL (upstream error).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/og-image:
+    get:
+      tags:
+      - Link Preview
+      summary: Generate placeholder OG image (1200x630 PNG)
+      description: 'Generates a 1200x630 PNG OpenGraph image (the canonical social
+
+        share size) from a title and optional subtitle. Renders with a
+
+        word-wrapped title, left brand accent bar, and optional subtitle
+
+        in a faded weight. The PNG can be referenced directly by
+
+        `<meta property="og:image">` or `<img src>`.
+
+
+        Uses Pillow (PIL). Returns 503 if Pillow is not installed.
+
+        '
+      parameters:
+      - name: title
+        in: query
+        required: true
+        description: Headline text (1-200 chars).
+        schema:
+          type: string
+          maxLength: 200
+          example: Hello World
+      - name: subtitle
+        in: query
+        required: false
+        description: Optional subtitle rendered smaller below the title (max 300 chars).
+        schema:
+          type: string
+          maxLength: 300
+          example: A LinkPeek demo
+      - name: bg
+        in: query
+        required: false
+        description: Hex background colour without
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: 1a1a2e
+      - name: fg
+        in: query
+        required: false
+        description: Hex foreground/title colour without
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: f5f5fa
+      - name: accent
+        in: query
+        required: false
+        description: Hex accent-bar colour without
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: 6366f1
+      responses:
+        '200':
+          description: OG image PNG generated successfully.
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                default: public, max-age=86400
+            X-LinkPeek-Generated:
+              schema:
+                type: string
+                default: 'true'
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/OgImageResponse'
+        '400':
+          description: Missing or empty `?title=`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Title exceeds 200 chars or subtitle exceeds 300 chars.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/extract:
+    get:
+      tags:
+      - Link Preview
+      summary: Deeper crawl — raw meta + headings + links
+      description: 'Raw meta dict + up to 50 headings + 100 links. A deeper HTML crawl
+
+        than `/api/preview` (collects body content). Same query/params.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Extracted metadata with headings and links.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Includes title, meta{}, headings[], links[], favicon, quota.
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Fetch failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/metadata-full:
+    get:
+      tags:
+      - Link Preview
+      summary: Full metadata dump (every meta tag)
+      description: Returns every meta tag found in the head, plus title, favicon, raw favicon, response headers, and head HTML length.
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Full metadata dump.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  title:
+                    type: string
+                  favicon:
+                    type: string
+                    format: uri
+                  raw_favicon:
+                    type: string
+                  meta:
+                    type: object
+                    description: All meta tags as key→value (multi-valued keys preserved).
+                  response_headers:
+                    type: object
+                  head_html_length:
+                    type: integer
+                  quota:
+                    $ref: '#/components/schemas/Quota'
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Fetch failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/batch:
+    get:
+      tags:
+      - Link Preview
+      summary: Batch link previews (up to 5 URLs)
+      description: 'Fetches link previews for up to 5 URLs in parallel (12s timeout).
+
+        Returns an array of preview objects.
+
+        '
+      parameters:
+      - name: urls
+        in: query
+        required: true
+        description: Comma-separated list of up to 5 URLs.
+        schema:
+          type: string
+          example: https://github.com,https://news.ycombinator.com
+      responses:
+        '200':
+          description: Batch preview results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/PreviewResponse'
+        '400':
+          description: Missing URLs or exceeding the 5-URL limit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/headers:
+    get:
+      tags:
+      - Link Preview
+      summary: HTTP response headers only
+      description: Returns only the HTTP response headers for a URL (no HTML parsing).
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Response headers object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  final_url:
+                    type: string
+                    format: uri
+                  status:
+                    type: integer
+                  headers:
+                    type: object
+                    description: Header name → value(s).
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Fetch failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  parameters:
+    UrlParam:
+      name: url
+      in: query
+      required: true
+      description: Target URL to analyze (must include http:// or https://).
+      schema:
+        type: string
+        format: uri
+        example: https://github.com
+  schemas:
+    PreviewResponse:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Page title (from <title> or og:title).
+        description:
+          type: string
+          description: Meta description or og:description.
+        image:
+          type: string
+          format: uri
+          description: Primary social image URL (og:image or twitter:image).
+        site_name:
+          type: string
+          description: Site name from og:site_name.
+        favicon:
+          type: string
+          format: uri
+          description: Best favicon URL (resolved to absolute).
+        url:
+          type: string
+          format: uri
+          description: Final resolved URL (after redirects).
+        quota:
+          $ref: '#/components/schemas/Quota'
+    OgImageResponse:
+      type: string
+      format: binary
+      description: A 1200x630 PNG image (the canonical OG image size).
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code or human-readable message.
+        url:
+          type: string
+          description: The URL that was attempted (when applicable).
+        detail:
+          type: string
+          description: Additional context (varies by endpoint).
+        max:
+          type: integer
+          description: Maximum allowed value when a limit is exceeded.
+        got:
+          type: integer
+          description: The submitted value that exceeded the limit.
+    Quota:
+      type: object
+      description: Rate-limit usage info appended to metered responses.
+      properties:
+        plan:
+          type: string
+          enum:
+          - free
+          - trial
+          - pro
+        limit:
+          type: integer
+          description: Daily request limit for the current plan.
+        used:
+          type: integer
+          description: Requests consumed today.
+        remaining:
+          type: integer
+          description: Requests remaining today.
+        reset_iso:
+          type: string
+          format: date-time
+          description: UTC ISO 8601 timestamp when the quota resets.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: 'Optional API key for Trial/Pro tiers (lifts daily quota to 50,000).
+
+        Obtain via `/api/key?email=` (free 14-day trial) or
+
+        `/api/subscribe?email=` (Pro, $1/mo). Free tier requires no key.
+
+        '

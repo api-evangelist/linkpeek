@@ -1,0 +1,246 @@
+openapi: 3.2.0
+info:
+  title: LinkPeek Favicon API
+  description: 'Free, open-source URL preview and QR code API. Turn any URL into a clean
+
+    JSON link-preview card and any string into a QR code — no signup, no API
+
+    key required for the free tier (100 requests/day per IP).
+
+
+    77+ developer utility endpoints covering link previews, QR codes,
+
+    favicons, meta tags, DNS, SSL, security checks, and developer tools.
+
+    Built for Discord/Telegram/Slack bots, bookmark apps, social clients,
+
+    and anyone who needs link metadata without signup friction.
+
+
+    **Quickstart:**
+
+    ```
+
+    curl "https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com"
+
+    ```
+
+
+    **Pricing:**
+
+    - **Free** — 100 req/day, no auth, just call the endpoint.
+
+    - **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.
+
+    - **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.
+
+
+    Pro keys work immediately; attach `?key=lp_pro_...` to any metered
+
+    endpoint to lift the daily quota to 50,000.
+
+    '
+  version: 1.19.1
+  contact:
+    name: LinkPeek
+    url: https://github.com/dcn13l/hermes-autonomia
+    email: linkpeek@example.com
+servers:
+- url: https://147.15.103.217.sslip.io:5000
+  description: Live production server
+security:
+- {}
+- ApiKeyAuth: []
+tags:
+- name: Favicon
+  description: Favicon discovery and extraction
+paths:
+  /api/favicon-extractor:
+    get:
+      tags:
+      - Favicon
+      summary: Discover all favicons from a URL
+      description: 'Parses a page''s `<link>` tags and returns every favicon/icon found
+
+        (apple-touch-icon, icon, shortcut icon, etc.) as structured JSON,
+
+        with document order preserved. Includes a best-guess recommendation
+
+        and a /favicon.ico fallback flag when no link-rel icons exist.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Favicon extraction successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaviconExtractorResponse'
+              example:
+                url: https://github.com
+                title: GitHub · Where the world builds software
+                icon_count: 3
+                icons:
+                - rel: icon
+                  href: https://github.githubassets.com/favicons/favicon.svg
+                  sizes: any
+                  type: image/svg+xml
+                - rel: apple-touch-icon
+                  href: https://github.githubassets.com/apple-touch-icon.png
+                  sizes: 180x180
+                  type: ''
+                best_guess:
+                  rel: apple-touch-icon
+                  href: https://github.githubassets.com/apple-touch-icon.png
+                  sizes: 180x180
+                  type: ''
+                favicon_ico_fallback: false
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Failed to fetch the target URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/favicons:
+    get:
+      tags:
+      - Favicon
+      summary: Proxy favicon image bytes
+      description: Returns the raw favicon image bytes for a URL (proxied to avoid CORS issues in browser clients).
+      parameters:
+      - $ref: '#/components/parameters/UrlParam'
+      responses:
+        '200':
+          description: Favicon image bytes.
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Missing or invalid URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Fetch failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    FaviconExtractorResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Final resolved URL.
+        title:
+          type: string
+          description: Page <title> text.
+        icon_count:
+          type: integer
+          description: Number of discovered icons.
+        icons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Icon'
+          description: All discovered icons in document order.
+        best_guess:
+          $ref: '#/components/schemas/Icon'
+          description: The recommended icon (highest resolution apple-touch or largest).
+        favicon_ico_fallback:
+          type: boolean
+          description: True if /favicon.ico was assumed (no link-rel icons found).
+        quota:
+          $ref: '#/components/schemas/Quota'
+    Icon:
+      type: object
+      properties:
+        rel:
+          type: string
+          description: Link rel attribute (icon, apple-touch-icon, etc.).
+        href:
+          type: string
+          format: uri
+          description: Absolute icon URL.
+        sizes:
+          type: string
+          description: Sizes attribute (e.g. "180x180").
+        type:
+          type: string
+          description: MIME type (e.g. image/png).
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code or human-readable message.
+        url:
+          type: string
+          description: The URL that was attempted (when applicable).
+        detail:
+          type: string
+          description: Additional context (varies by endpoint).
+        max:
+          type: integer
+          description: Maximum allowed value when a limit is exceeded.
+        got:
+          type: integer
+          description: The submitted value that exceeded the limit.
+    Quota:
+      type: object
+      description: Rate-limit usage info appended to metered responses.
+      properties:
+        plan:
+          type: string
+          enum:
+          - free
+          - trial
+          - pro
+        limit:
+          type: integer
+          description: Daily request limit for the current plan.
+        used:
+          type: integer
+          description: Requests consumed today.
+        remaining:
+          type: integer
+          description: Requests remaining today.
+        reset_iso:
+          type: string
+          format: date-time
+          description: UTC ISO 8601 timestamp when the quota resets.
+  parameters:
+    UrlParam:
+      name: url
+      in: query
+      required: true
+      description: Target URL to analyze (must include http:// or https://).
+      schema:
+        type: string
+        format: uri
+        example: https://github.com
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: 'Optional API key for Trial/Pro tiers (lifts daily quota to 50,000).
+
+        Obtain via `/api/key?email=` (free 14-day trial) or
+
+        `/api/subscribe?email=` (Pro, $1/mo). Free tier requires no key.
+
+        '

@@ -1,0 +1,279 @@
+openapi: 3.2.0
+info:
+  title: LinkPeek QR Code API
+  description: 'Free, open-source URL preview and QR code API. Turn any URL into a clean
+
+    JSON link-preview card and any string into a QR code — no signup, no API
+
+    key required for the free tier (100 requests/day per IP).
+
+
+    77+ developer utility endpoints covering link previews, QR codes,
+
+    favicons, meta tags, DNS, SSL, security checks, and developer tools.
+
+    Built for Discord/Telegram/Slack bots, bookmark apps, social clients,
+
+    and anyone who needs link metadata without signup friction.
+
+
+    **Quickstart:**
+
+    ```
+
+    curl "https://147.15.103.217.sslip.io:5000/api/preview?url=https://github.com"
+
+    ```
+
+
+    **Pricing:**
+
+    - **Free** — 100 req/day, no auth, just call the endpoint.
+
+    - **Trial** — 50,000 req/day, free 14-day API key via `/api/key?email=`.
+
+    - **Pro** — 50,000 req/day, $1/mo via `/api/subscribe?email=`.
+
+
+    Pro keys work immediately; attach `?key=lp_pro_...` to any metered
+
+    endpoint to lift the daily quota to 50,000.
+
+    '
+  version: 1.19.1
+  contact:
+    name: LinkPeek
+    url: https://github.com/dcn13l/hermes-autonomia
+    email: linkpeek@example.com
+servers:
+- url: https://147.15.103.217.sslip.io:5000
+  description: Live production server
+security:
+- {}
+- ApiKeyAuth: []
+tags:
+- name: QR Code
+  description: QR code generation (PNG and base64 JSON)
+paths:
+  /api/qr:
+    get:
+      tags:
+      - QR Code
+      summary: Generate QR code PNG
+      description: 'Generates a QR code from the provided text and returns it as a PNG
+
+        image (raw binary). Optional error correction, foreground, and
+
+        background colour parameters.
+
+
+        Returns `image/png` bytes — pipe to a file or embed directly.
+
+        '
+      parameters:
+      - name: text
+        in: query
+        required: true
+        description: Text to encode (max 2000 chars).
+        schema:
+          type: string
+          example: https://example.com
+      - name: ecc
+        in: query
+        required: false
+        description: Error correction level.
+        schema:
+          type: string
+          enum:
+          - l
+          - m
+          - q
+          - h
+          default: m
+      - name: fg
+        in: query
+        required: false
+        description: Foreground colour (hex without
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: '000000'
+      - name: bg
+        in: query
+        required: false
+        description: Background colour (hex without
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: ffffff
+      responses:
+        '200':
+          description: QR code PNG image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QrJsonResponse'
+        '400':
+          description: Missing `?text=` parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Text exceeds 2000 character limit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/qrcode:
+    get:
+      tags:
+      - QR Code
+      summary: Generate QR code as base64 JSON
+      description: 'Same QR generation as `/api/qr` but returns the PNG as a base64
+
+        data URI inside a JSON envelope. Useful for JSON-only consumers
+
+        (webhooks, serverless functions) that cannot consume raw binary.
+
+
+        Query params identical to `/api/qr` (`text`, `ecc`, `fg`, `bg`).
+
+        '
+      parameters:
+      - name: text
+        in: query
+        required: true
+        description: Text to encode (max 2000 chars).
+        schema:
+          type: string
+          example: https://example.com
+      - name: ecc
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - l
+          - m
+          - q
+          - h
+          default: m
+      - name: fg
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: '000000'
+      - name: bg
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9a-fA-F]{6}$
+          default: ffffff
+      responses:
+        '200':
+          description: QR code as base64-encoded PNG inside JSON.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QrJsonResponse'
+        '400':
+          description: Missing `?text=` parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Text exceeds 2000 character limit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    QrJsonResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        text:
+          type: string
+          description: The encoded text.
+        ecc:
+          type: string
+          enum:
+          - l
+          - m
+          - q
+          - h
+          description: Error correction level used.
+        size_bytes:
+          type: integer
+          description: PNG byte count.
+        image:
+          type: string
+          description: Data URI — `data:image/png;base64,...`.
+          example: data:image/png;base64,iVBORw0KGgo...
+        quota:
+          $ref: '#/components/schemas/Quota'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code or human-readable message.
+        url:
+          type: string
+          description: The URL that was attempted (when applicable).
+        detail:
+          type: string
+          description: Additional context (varies by endpoint).
+        max:
+          type: integer
+          description: Maximum allowed value when a limit is exceeded.
+        got:
+          type: integer
+          description: The submitted value that exceeded the limit.
+    Quota:
+      type: object
+      description: Rate-limit usage info appended to metered responses.
+      properties:
+        plan:
+          type: string
+          enum:
+          - free
+          - trial
+          - pro
+        limit:
+          type: integer
+          description: Daily request limit for the current plan.
+        used:
+          type: integer
+          description: Requests consumed today.
+        remaining:
+          type: integer
+          description: Requests remaining today.
+        reset_iso:
+          type: string
+          format: date-time
+          description: UTC ISO 8601 timestamp when the quota resets.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: 'Optional API key for Trial/Pro tiers (lifts daily quota to 50,000).
+
+        Obtain via `/api/key?email=` (free 14-day trial) or
+
+        `/api/subscribe?email=` (Pro, $1/mo). Free tier requires no key.
+
+        '
