@@ -8,6 +8,31 @@ created: '2026-08-09'
 modified: '2026-08-09'
 specificationVersion: '0.23'
 tags:
+  - Screenshots
+  - webpage-capture
+  - website-thumbnails
+  - Image-Generation
+  - Rendering
+  - web-scraping-adjacent
+  - Developer Tools
+  - Software-as-a-Service
+  - rest-image-api
+  - Utility API
+  - URL Metadata
+  - Link Preview
+  - OpenGraph
+  - QR Code Generation
+  - DNS
+  - WHOIS
+  - SSL
+  - Web Security Scanning
+  - IP Geolocation
+  - Data Conversion
+  - LLM-Compatible API
+  - API Utilities
+  - dns-whois
+  - openai-compatible-llm
+tags_raw:
   - screenshots
   - webpage-capture
   - website-thumbnails
@@ -46,6 +71,16 @@ apis:
   humanURL: https://linkpeek.com/docs
   baseURL: https://linkpeek.com/api/v1
   tags:
+  - Screenshots
+  - webpage-capture
+  - website-thumbnails
+  - Image-Generation
+  - Rendering
+  - web-scraping-adjacent
+  - Developer Tools
+  - Software-as-a-Service
+  - rest-image-api
+  tags_raw:
   - screenshots
   - webpage-capture
   - website-thumbnails
