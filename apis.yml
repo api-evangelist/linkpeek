@@ -1,8 +1,7 @@
 name: LinkPeek
 description: >-
-  LinkPeek.com is a real-time website screenshot service that captures, stores, serves, and refreshes webpage snapshots
-  via a simple API-key-gated HTTP GET image API. Customers embed hotlinkable screenshots in websites, apps, blogs, and
-  emails, with support for mobile/tablet viewports and pixel-level sizing.
+  A real-time website screenshot / webpage-snapshot REST API that captures, stores, serves, and refreshes embeddable
+  webpage screenshots with size, quality, and viewport controls.
 url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
 created: '2026-08-09'
 modified: '2026-08-25'
@@ -51,6 +50,10 @@ tags:
   - Image Capture / Rendering
   - Web Content / Media
   - SaaS Utility API
+  - Website Capture
+  - Web Thumbnails
+  - Web Scraping
+  - Web Publishing
 tags_raw:
   - screenshots
   - webpage-capture
@@ -85,8 +88,8 @@ tags_raw:
 apis:
   - name: LinkPeek Screenshot API
     description: >-
-      REST-style HTTP GET image API that takes a target URL plus formatting flags (size, viewport) and returns a
-      hotlinkable, self-refreshing website screenshot. Requires a plan-issued API key.
+      Single-endpoint REST/HTTP screenshot API that returns an image for a target URL. Authenticated with an apikey plus
+      a secret-signed token; supports size, viewport, and full-page capture options.
     humanURL: https://linkpeek.com/docs
     baseURL: https://linkpeek.com/api/v1
     tags:
@@ -112,6 +115,10 @@ apis:
       - Image Capture / Rendering
       - Web Content / Media
       - SaaS Utility API
+      - Website Capture
+      - Web Thumbnails
+      - Web Scraping
+      - Web Publishing
     tags_raw:
       - screenshots
       - webpage-capture
@@ -139,6 +146,10 @@ apis:
         url: https://linkpeek.com/blog
       - type: Documentation
         url: https://linkpeek.com/docs/faq
+      - type: Documentation
+        url: https://linkpeek.com/docs/screenshot-size-and-quality
+      - type: Documentation
+        url: https://linkpeek.com/website-to-image-screenshot-service
   - name: LinkPeek Website Screenshot API
     description: >-
       GET-based, image-returning HTTP API for capturing website screenshots. Accepts a target URL plus option flags
@@ -168,11 +179,13 @@ maintainers:
     url: https://github.com/dcn13l/hermes-autonomia
   - FN: LinkPeek
     url: https://linkpeek.com/
+  - FN: LinkPeek
+    url: https://linkpeek.com
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 85
-  at: '2026-08-25T09:08:54.438Z'
+  confidence: 90
+  at: '2026-08-25T14:51:30.993Z'
 common:
   - type: Website
     url: https://linkpeek.com/
