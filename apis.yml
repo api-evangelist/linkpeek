@@ -1,7 +1,7 @@
 name: LinkPeek
 description: >-
-  A real-time website screenshot / webpage-snapshot REST API that captures, stores, serves, and refreshes embeddable
-  webpage screenshots with size, quality, and viewport controls.
+  Real-time website-screenshot service that captures, stores, serves, and periodically refreshes webpage screenshots.
+  Send a target URL and receive an image; cached images return in milliseconds and fresh captures in seconds.
 url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
 created: '2026-08-09'
 modified: '2026-08-25'
@@ -54,6 +54,11 @@ tags:
   - Web Thumbnails
   - Web Scraping
   - Web Publishing
+  - website-screenshots
+  - screenshot-api
+  - web-rendering
+  - image-capture
+  - link-preview
 tags_raw:
   - screenshots
   - webpage-capture
@@ -172,6 +177,24 @@ apis:
         url: https://linkpeek.com/docs/faq
       - type: Documentation
         url: https://linkpeek.com/website-to-image-screenshot-service
+  - name: Website Screenshot API
+    description: >-
+      REST-style HTTP GET image API. A call to /api/v1 with query parameters (uri, size, viewport) returns a screenshot
+      image directly. Authenticated with an apikey plus an MD5 request-signature token; requires a paid account.
+    humanURL: https://linkpeek.com/website-to-image-screenshot-service
+    baseURL: https://linkpeek.com/api/v1
+    tags:
+      - website-screenshots
+      - screenshot-api
+      - web-rendering
+      - image-capture
+      - thumbnails
+      - link-preview
+      - developer-tools
+      - SaaS
+    properties:
+      - type: Documentation
+        url: https://linkpeek.com/docs
 maintainers:
   - FN: Russell Ballestrini
     url: https://linkpeek.com
@@ -181,11 +204,13 @@ maintainers:
     url: https://linkpeek.com/
   - FN: LinkPeek
     url: https://linkpeek.com
+  - FN: Russell Ballestrini
+    url: https://linkpeek.com/
 generated:
   by: apis.io/add
   model: claude-opus-4-8
-  confidence: 90
-  at: '2026-08-25T14:51:30.993Z'
+  confidence: 80
+  at: '2026-08-25T19:41:37.188Z'
 common:
   - type: Website
     url: https://linkpeek.com/
