@@ -1,7 +1,7 @@
 name: LinkPeek
 description: >-
-  LinkPeek is a fast real-time website screenshot service that captures, stores, serves, and auto-refreshes webpage
-  snapshots on demand via a simple HTTP GET image API.
+  Hosted real-time webpage screenshot service. Captures, caches, serves, and refreshes website snapshots via a simple
+  signed REST API, returning images with pixel-level size control and viewport emulation.
 url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
 created: '2026-08-09'
 modified: '2026-08-25'
@@ -70,6 +70,7 @@ tags:
   - Web Page Capture
   - Image Generation & Rendering
   - Media & Thumbnails
+  - Thumbnails
 tags_raw:
   - screenshots
   - webpage-capture
@@ -104,8 +105,8 @@ tags_raw:
 apis:
   - name: LinkPeek Screenshot API
     description: >-
-      HTTP GET endpoint that returns a cached or freshly captured website screenshot image. Accepts a target URL plus
-      options such as size and viewport (device emulation). Requires an account-issued API key on paid plans.
+      Signed GET endpoint that returns a webpage screenshot. Auth is API-key plus an MD5 token computed from a shared
+      secret, the target uri, and size. Supports uri, apikey, token, size, and viewport query parameters.
     humanURL: https://linkpeek.com/docs
     baseURL: https://linkpeek.com/api/v1
     tags:
@@ -138,6 +139,8 @@ apis:
       - Web Page Capture
       - Image Generation & Rendering
       - Media & Thumbnails
+      - Thumbnails
+      - Utility API
     tags_raw:
       - screenshots
       - webpage-capture
@@ -233,7 +236,7 @@ generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 85
-  at: '2026-08-25T21:15:05.055Z'
+  at: '2026-08-25T21:14:58.353Z'
 common:
   - type: Website
     url: https://linkpeek.com/
