@@ -1,8 +1,8 @@
 name: LinkPeek
 description: >-
-  LinkPeek.com is a hosted real-time webpage screenshot service. Its GET-based image API captures, stores, serves, and
-  refreshes website snapshots, supporting full-page/full-height capture, size/aspect-ratio cropping, and device
-  emulation via query parameters. Also offers a free website thumbnail generator.
+  LinkPeek.com is a real-time website screenshot service that captures, stores, serves, and refreshes webpage snapshots
+  via a simple API-key-gated HTTP GET image API. Customers embed hotlinkable screenshots in websites, apps, blogs, and
+  emails, with support for mobile/tablet viewports and pixel-level sizing.
 url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
 created: '2026-08-09'
 modified: '2026-08-25'
@@ -48,6 +48,9 @@ tags:
   - developer-tools
   - rest-api
   - media/imaging
+  - Image Capture / Rendering
+  - Web Content / Media
+  - SaaS Utility API
 tags_raw:
   - screenshots
   - webpage-capture
@@ -82,8 +85,8 @@ tags_raw:
 apis:
   - name: LinkPeek Screenshot API
     description: >-
-      REST-style HTTP GET image API that returns a website screenshot for a given target URL with optional parameters
-      for size, cropping, and viewport emulation; embeddable directly in HTML.
+      REST-style HTTP GET image API that takes a target URL plus formatting flags (size, viewport) and returns a
+      hotlinkable, self-refreshing website screenshot. Requires a plan-issued API key.
     humanURL: https://linkpeek.com/docs
     baseURL: https://linkpeek.com/api/v1
     tags:
@@ -106,6 +109,9 @@ apis:
       - Image Generation
       - Web Rendering
       - Media/Utilities
+      - Image Capture / Rendering
+      - Web Content / Media
+      - SaaS Utility API
     tags_raw:
       - screenshots
       - webpage-capture
@@ -166,7 +172,7 @@ generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 85
-  at: '2026-08-25T01:53:03.764Z'
+  at: '2026-08-25T09:08:54.438Z'
 common:
   - type: Website
     url: https://linkpeek.com/
