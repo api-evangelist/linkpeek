@@ -3,6 +3,17 @@ description: >-
   Real-time website screenshot service that captures, stores, serves, and refreshes webpage snapshots via a simple
   GET-based image API. Give it a target URI and it returns a screenshot image.
 url: https://raw.githubusercontent.com/api-evangelist/linkpeek/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 created: '2026-08-09'
 modified: '2026-08-26'
 specificationVersion: '0.21'
