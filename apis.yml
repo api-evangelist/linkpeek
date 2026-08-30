@@ -22,10 +22,10 @@ tags:
   - webpage-capture
   - website-thumbnails
   - Image-Generation
-  - Rendering
+  - rendering
   - web-scraping-adjacent
   - Developer Tools
-  - Software-as-a-Service
+  - saas
   - rest-image-api
   - Utility API
   - URL Metadata
@@ -39,56 +39,9 @@ tags:
   - IP Geolocation
   - Data Conversion
   - LLM-Compatible API
-  - API Utilities
+  - api-utilities
   - dns-whois
   - openai-compatible-llm
-  - Screenshot API
-  - Web Capture
-  - Imaging API
-  - Website Monitoring
-  - SaaS
-  - Website Screenshots
-  - Web Page Thumbnails
-  - Image Generation
-  - Web Rendering
-  - Media/Utilities
-  - screenshots
-  - thumbnails
-  - image-generation
-  - developer-tools
-  - rest-api
-  - media/imaging
-  - Image Capture / Rendering
-  - Web Content / Media
-  - SaaS Utility API
-  - Website Capture
-  - Web Thumbnails
-  - Web Scraping
-  - Web Publishing
-  - website-screenshots
-  - screenshot-api
-  - web-rendering
-  - image-capture
-  - link-preview
-  - website screenshot
-  - webpage snapshot
-  - thumbnail generation
-  - image-as-a-service
-  - web capture
-  - developer tools
-  - SEO
-  - marketing tooling
-  - Web Page Capture
-  - Image Generation & Rendering
-  - Media & Thumbnails
-  - Thumbnails
-  - Website screenshots
-  - Webpage snapshots
-  - Web capture
-  - Thumbnail generation
-  - Website monitoring
-  - Developer tools
-  - Media & imaging API
 tags_raw:
   - screenshots
   - webpage-capture
@@ -132,40 +85,11 @@ apis:
       - webpage-capture
       - website-thumbnails
       - Image-Generation
-      - Rendering
+      - rendering
       - web-scraping-adjacent
       - Developer Tools
-      - Software-as-a-Service
+      - saas
       - rest-image-api
-      - Screenshot API
-      - Web Capture
-      - Imaging API
-      - Website Monitoring
-      - SaaS
-      - Website Screenshots
-      - Web Page Thumbnails
-      - Image Generation
-      - Web Rendering
-      - Media/Utilities
-      - Image Capture / Rendering
-      - Web Content / Media
-      - SaaS Utility API
-      - Website Capture
-      - Web Thumbnails
-      - Web Scraping
-      - Web Publishing
-      - Web Page Capture
-      - Image Generation & Rendering
-      - Media & Thumbnails
-      - Thumbnails
-      - Utility API
-      - Website screenshots
-      - Webpage snapshots
-      - Web capture
-      - Thumbnail generation
-      - Website monitoring
-      - Developer tools
-      - Media & imaging API
     tags_raw:
       - screenshots
       - webpage-capture
@@ -205,6 +129,22 @@ apis:
     humanURL: https://linkpeek.com/docs
     baseURL: https://linkpeek.com/api/v1
     tags:
+      - Screenshots
+      - webpage-capture
+      - Thumbnails
+      - Image-Generation
+      - web-scraping-adjacent
+      - Developer Tools
+      - REST API
+      - media/imaging
+      - website screenshot
+      - webpage snapshot
+      - Thumbnail Generation
+      - image-as-a-service
+      - Web Capture
+      - SEO
+      - marketing tooling
+    tags_raw:
       - screenshots
       - webpage-capture
       - thumbnails
@@ -235,6 +175,15 @@ apis:
     humanURL: https://linkpeek.com/website-to-image-screenshot-service
     baseURL: https://linkpeek.com/api/v1
     tags:
+      - Website Screenshots
+      - Screenshot API
+      - Web Rendering
+      - Image Capture
+      - Thumbnails
+      - Link Preview
+      - Developer Tools
+      - Software-as-a-Service
+    tags_raw:
       - website-screenshots
       - screenshot-api
       - web-rendering
