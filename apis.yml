@@ -22,10 +22,10 @@ tags:
   - webpage-capture
   - website-thumbnails
   - Image-Generation
-  - rendering
+  - Rendering
   - web-scraping-adjacent
   - Developer Tools
-  - saas
+  - Software-as-a-Service
   - rest-image-api
   - Utility API
   - URL Metadata
@@ -39,7 +39,7 @@ tags:
   - IP Geolocation
   - Data Conversion
   - LLM-Compatible API
-  - api-utilities
+  - API Utilities
   - dns-whois
   - openai-compatible-llm
 tags_raw:
@@ -85,10 +85,10 @@ apis:
       - webpage-capture
       - website-thumbnails
       - Image-Generation
-      - rendering
+      - Rendering
       - web-scraping-adjacent
       - Developer Tools
-      - saas
+      - Software-as-a-Service
       - rest-image-api
     tags_raw:
       - screenshots
@@ -176,7 +176,7 @@ apis:
     baseURL: https://linkpeek.com/api/v1
     tags:
       - Website Screenshots
-      - Screenshot API
+      - screenshot-api
       - Web Rendering
       - Image Capture
       - Thumbnails
