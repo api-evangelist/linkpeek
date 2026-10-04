@@ -21,7 +21,7 @@ tags:
   - Screenshots
   - webpage-capture
   - website-thumbnails
-  - Image-Generation
+  - Image Generation
   - Rendering
   - web-scraping-adjacent
   - Developer Tools
@@ -73,6 +73,7 @@ tags_raw:
   - web-security-scanning
   - data-conversion
   - openai-compatible-llm
+  - Image-Generation
 apis:
   - name: LinkPeek Screenshot API
     description: >-
@@ -84,7 +85,7 @@ apis:
       - Screenshots
       - webpage-capture
       - website-thumbnails
-      - Image-Generation
+      - Image Generation
       - Rendering
       - web-scraping-adjacent
       - Developer Tools
@@ -100,6 +101,7 @@ apis:
       - developer-tools
       - saas
       - rest-image-api
+      - Image-Generation
     properties:
       - type: Documentation
         url: https://linkpeek.com/docs
@@ -132,7 +134,7 @@ apis:
       - Screenshots
       - webpage-capture
       - Thumbnails
-      - Image-Generation
+      - Image Generation
       - web-scraping-adjacent
       - Developer Tools
       - REST API
@@ -161,6 +163,7 @@ apis:
       - developer tools
       - SEO
       - marketing tooling
+      - Image-Generation
     properties:
       - type: Documentation
         url: https://linkpeek.com/docs
