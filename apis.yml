@@ -179,7 +179,7 @@ apis:
     baseURL: https://linkpeek.com/api/v1
     tags:
       - Website Screenshots
-      - screenshot-api
+      - Screenshots
       - Web Rendering
       - Image Capture
       - Thumbnails
