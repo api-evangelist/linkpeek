@@ -1,4 +1,4 @@
-# LinkPeek (linkpeek)
+# LinkPeek
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,40 +64,95 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-## What this record covers
+Real-time website screenshot service that captures, stores, serves, and refreshes webpage snapshots via a simple GET-based image API. Give it a target URI and it returns a screenshot image.
 
-**[linkpeek.com](https://linkpeek.com/)** — a Website Screenshot SaaS. You give it a target URL
-and it captures, stores, serves and refreshes a screenshot of that page through a REST-style
-image API. API-key authenticated, paid plans.
+**Areas:** Screenshots · webpage-capture · website-thumbnails · Image Generation · Rendering · web-scraping-adjacent · Developer Tools · Software-as-a-Service · rest-image-api · Utility API · URL Metadata · Link Preview
 
-One API is recorded: the **LinkPeek Screenshot API**, at `https://linkpeek.com/api/v1`.
+## LinkPeek on APIs.io
 
-## Why this record is thin
+Everything profiled for LinkPeek is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/linkpeek/](https://apis.io/providers/linkpeek/)** — or go straight to one of the APIs or properties below.
 
-It is thin on purpose, and the reason is worth stating plainly.
+### APIs (3)
 
-**Two unrelated projects use the name LinkPeek.** The other one submitted itself to the
-[apis.io Add-API form](https://apis.io/add/) several times from `147.15.103.217.sslip.io` — a raw
-IP address behind wildcard DNS, with an anonymous contact address. Because the intake gate matches
-on the submitted **name**, its artifacts were attached to this record.
+- [LinkPeek Screenshot API](https://apis.io/apis/linkpeek/linkpeek-screenshot-api/) — GET-based HTTP image API that returns a screenshot for any given web page URI. Embeddable directly in HTML via img/anchor tags. Supports request options…
+- [LinkPeek Website Screenshot API](https://apis.io/apis/linkpeek/linkpeek-website-screenshot-api/) — REST-style HTTP GET endpoint that accepts a target web page URI and returns a screenshot image. Supports size (e.g., size=original) and viewport…
+- [Website Screenshot API](https://apis.io/apis/linkpeek/website-screenshot-api/) — REST-style HTTP GET image API. A call to /api/v1 with query parameters (uri, size, viewport) returns a screenshot image directly. Authenticated with an…
 
-The result was a record that read as linkpeek.com while its entire evidence base belonged to
-somebody else: five harvested OpenAPI definitions all declaring
-`servers: https://147.15.103.217.sslip.io:5000`, plus generated collections, agent skills, an MCP
-descriptor, plans, rate limits and security artifacts — 34 files in total — every one of them
-derived from that host rather than from linkpeek.com.
+### Published properties
 
-All of it has been removed. What remains is what linkpeek.com itself publishes, and every URL in
-this record was fetched and confirmed to return 200 against a control path that returns a real 404.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**linkpeek.com publishes no machine-readable artifacts of its own.** Its `apis.json`,
-`openapi.json` and `llms.txt` all return 404. So there is no specification to record here, and none
-has been invented to fill the gap. A thin, honest record is the correct outcome; the rating reflects
-what is published, and nothing else.
+#### Plans and pricing (1)
 
-## If you are from LinkPeek
+Published plans, tiers and prices.
 
-If anything here is wrong, or you publish a specification we have not found, write to
-kin@apievangelist.com and it gets corrected. Removal is honored on request, at no charge.
+- [Linkpeek Plans](https://apis.io/plans/linkpeek/linkpeek-plans/)
 
-— Corrected 2026-08-23
+#### Rate limits (1)
+
+Published request limits.
+
+- [Linkpeek Rate Limits](https://apis.io/rate-limits/linkpeek/linkpeek-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://linkpeek.com/)
+- [Documentation](https://linkpeek.com/docs)
+- [API reference](https://linkpeek.com/docs/request-options)
+- [Support](https://linkpeek.com/contact)
+- [Blog](https://linkpeek.com/blog)
+
+## API Evangelist rating
+
+**Kin Score 13.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 53.6 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 17.1 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 0.0** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/linkpeek/](https://apis.io/providers/linkpeek/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LinkPeek: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/linkpeek/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
